@@ -6,9 +6,9 @@ class Database
 {
 	private $mysql_connection;
 
-	public function __construct($db_host, $username, $password)
+	public function __construct()
 	{
-		$this->$mysql_connection = new mysqli($db_host, $username, $password);
+		$this->$mysql_connection = new mysqli("localhost", "root", "root");
 
 		if ($this->$mysql_connection->connection_error)
 			die("Connection failed: $this->$mysql_connection->connection_error");
@@ -91,6 +91,28 @@ class Database
 		return $boards;
 	}
 
+	public function get_board($board_id)
+	{
+		$this->$mysql_connection->select_db("meta");
+		$query_result = $this->query("select * from board_info where id = '$board_id';");
+		$board_array = $query_result->fetch_array();
+		$board = new Board();
+
+		$board->id = $board_array["id"];
+		$board->title = $board_array["title"];
+		$board->subtitle = $board_array["subtitle"];
+
+		$this->$mysql_connection->select_db($board_id);			
+		$query_result = $this->query("select id from posts where is_reply = 0;");
+		
+		while ($post_id = $query_result->fetch_assoc())
+		{
+			array_push($board->posts, $this->read_post($board_id, $post_id["id"]));
+		}
+
+		return $board;
+	}
+
 	// Adds a post entry to the posts table
 	// Does not upload any attachments!
 	public function write_post($board_id, $is_reply, $replies_to, $title, $body, $image_file, $poster_ip, $poster_country, $is_staff_post, $staff_username)
@@ -111,8 +133,6 @@ class Database
 		) values (
 			$is_reply, $replies_to, '$title', '$body', '$image_file', '$poster_ip', '$poster_country', $is_staff_post, '$staff_username', 0
 		);";
-
-		echo $query;
 
 		$this->query($query);
 	}

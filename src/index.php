@@ -3,10 +3,11 @@
 	include_once "internal/database.php";
 	include_once "internal/board.php";
 
-	$database = new Database("localhost", "root", "root");
+	$database = new Database();
 	$database->setup_meta_info_database();
 
 	// board_create($database, "test", "Test board", "This is a test board");
+	// $database->write_post("test", false, 0, "Title", "Post body", "image.png", "1.1.1.1", "pl", 0, "");
 ?>
 
 <html>

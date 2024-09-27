@@ -10,7 +10,11 @@ function board_create($database, $id, $title, $subtitle = "")
 	{
 		mkdir("$id");
 		$index_file = fopen("$id/index.php", "w");
-		fwrite($index_file, "<?php include __DIR__ . '../board_index.php'");
+		fwrite($index_file, "
+<?php
+\$board_id = '$id';
+include __DIR__ . '/../board_index.php';
+		");
 	}
 }
 
@@ -19,4 +23,6 @@ class Board
 	public $board_id;
 	public $board_title;
 	public $board_subtitle;
+
+	public $posts = array();
 }

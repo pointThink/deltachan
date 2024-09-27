@@ -22,10 +22,12 @@ class Post
 
 	public function display()
 	{
+		echo "<div class=post>";
 		echo "$this->id | $this->board<br>";
 		echo "$this->creation_time | $this->last_bump_time<br>";
 		echo "$this->title<br>";
 		echo "$this->body | $this->image_file<br>";
-		echo "$this->is_staff_post | $this->staff_username<br><hr>";
+		echo "$this->is_staff_post | $this->staff_username";
+		echo "</div><hr>";
 	}
 }
