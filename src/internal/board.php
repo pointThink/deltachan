@@ -9,12 +9,25 @@ function board_create($database, $id, $title, $subtitle = "")
 	if (!is_dir("$id"))
 	{
 		mkdir("$id");
+
 		$index_file = fopen("$id/index.php", "w");
 		fwrite($index_file, "
 <?php
 \$board_id = '$id';
 include __DIR__ . '/../board_index.php';
 		");
+
+		fclose($index_file);
+
+		$post_view_file = fopen("$id/post.php", "w");
+		fwrite($post_view_file, "
+<?php
+\$board_id = '$id';
+include __DIR__ . '/../single_post_view.php';
+		");
+
+		fclose($post_view_file);
+
 	}
 }
 
