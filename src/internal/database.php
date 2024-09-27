@@ -24,6 +24,9 @@ class Database
 				is_reply int not null,
 				replies_to int,
 
+				creation_time datetime not null default current_timestamp,
+				bump_time datetime not null default current_timestamp,
+
 				title varchar(255),
 				post_body text,
 				image_file_name varchar(255),
@@ -35,6 +38,32 @@ class Database
 				staff_username varchar(255)
 			);
 		");
+	}
+
+	// Adds a post entry to the posts table
+	// Does not upload any attachments!
+	public function write_post($board_id, $is_reply, $replies_to, $title, $body, $image_file, $poster_ip, $poster_country, $is_staff_post, $staff_username)
+	{
+		$this->$mysql_connection->select_db($board_id);
+
+		if (!$is_reply) $replies_to = 0;
+		if (!$is_staff_post) $staff_username = "";
+
+		$is_reply = intval($is_reply);
+
+		// prevent sql injection
+		$title = $this->$mysql_connection->real_escape_string($title);
+		$body = $this->$mysql_connection->real_escape_string($body);	
+
+		$query = "insert into posts(
+			is_reply, replies_to, title, post_body, image_file_name, poster_ip, poster_country, is_staff_post, staff_username
+		) values (
+			$is_reply, $replies_to, '$title', '$body', '$image_file', '$poster_ip', '$poster_country', $is_staff_post, '$staff_username'
+		);";
+
+		echo $query;
+
+		$this->query($query);
 	}
 
 	private function query($str)
