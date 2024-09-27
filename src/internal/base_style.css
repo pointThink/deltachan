@@ -1,0 +1,66 @@
+/* base style */
+
+body {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#board_index_header {
+	text-align: center;
+}
+
+.post_form {
+	max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+
+	max-width: 8cm
+}
+
+.post_form input, .post_form textarea  {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.post {
+	padding: 0.2cm;
+	margin-top: 0.5cm;
+	margin-bottom: 0.5cm;
+	display: inline-block;
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+.post .post_id {
+	font-size: 12px;
+	margin: 0;
+}
+
+.post h4 {
+	margin: 0;
+}
+
+.post pre {
+	margin: 0;
+}
+
+.post .post_attachment {
+	max-width: 200px;
+	max-height: 200px;
+
+	float: left;
+	display: inline-block;
+
+	margin-right: 0.2cm;
+}
+
+/* looks */
+body {
+	background: linear-gradient(180deg, #c9d4ff 0%, #ebefff 100%);
+	color: black;
+}
+
+.post {
+	background: #cfd8ff;
+	border: 1px solid black;
+}

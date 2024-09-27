@@ -6,6 +6,7 @@ include_once "internal/database.php";
 <html>
 	<head>
 		<title>Board index</title>
+		<link href="/internal/base_style.css" rel=stylesheet>
 	</head>
 
 	<body>

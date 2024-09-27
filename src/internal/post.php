@@ -23,12 +23,10 @@ class Post
 	public function display()
 	{
 		echo "<div class=post>";
-		echo "<img src='/$this->image_file'><br>";
-		echo "$this->id | $this->board<br>";
-		echo "$this->creation_time | $this->last_bump_time<br>";
-		echo "$this->title<br>";
-		echo "$this->body | $this->image_file<br>";
-		echo "$this->is_staff_post | $this->staff_username";
-		echo "</div><hr>";
+		echo "<a href=/$this->image_file><img class=post_attachment src='/$this->image_file'></a>";
+		echo "<p class=post_id>>$this->id | $this->creation_time</p>";
+		echo "<h4>$this->title</h4>";
+		echo "<pre>$this->body</pre>";
+		echo "</div>";
 	}
 }
