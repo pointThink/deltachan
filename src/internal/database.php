@@ -1,5 +1,6 @@
 <?php
 include_once "post.php";
+include_once "board.php";
 
 class Database
 {
@@ -10,7 +11,7 @@ class Database
 		$this->$mysql_connection = new mysqli($db_host, $username, $password);
 
 		if ($this->$mysql_connection->connection_error)
-			die("Connection failed: $database->connection_error");
+			die("Connection failed: $this->$mysql_connection->connection_error");
 	}
 
 	// Sets up a database with necesary tables for a board 
@@ -37,16 +38,18 @@ class Database
 				poster_country varchar(2),
 
 				is_staff_post int not null,
-				staff_username varchar(255)
+				staff_username varchar(255),
+
+				approved int not null default 0
 			);
 		");
 	}
 
-	public function setup_board_info_database()
+	public function setup_meta_info_database()
 	{
-		$this->query("create database if not exists board_info;");
+		$this->query("create database if not exists meta;");
 		
-		$this->$mysql_connection->select_db("board_info");
+		$this->$mysql_connection->select_db("meta");
 
 		$this->query("
 			create table if not exists board_info (
@@ -59,7 +62,7 @@ class Database
 
 	public function add_board_info_row($id, $title, $subtitle)
 	{
-		$this->$mysql_connection->select_db("board_info");
+		$this->$mysql_connection->select_db("meta");
 		$this->query("
 			insert into board_info (
 				id, title, subtitle
@@ -67,6 +70,25 @@ class Database
 				'$id', '$title', '$subtitle'
 			);
 		");
+	}
+
+	// Fetches all the boards on the chan
+	public function get_boards()
+	{
+		$this->$mysql_connection->select_db("meta");
+		$query_result = $this->query("select * from board_info;");
+		$boards = array();
+
+		while ($board_array = $query_result->fetch_assoc())
+		{
+			$board = new Board();
+			$board->id = $board_array["id"];
+			$board->title = $board_array["title"];
+			$board->subtitle = $board_array["subtitle"];
+			array_push($boards, $board);
+		}
+
+		return $boards;
 	}
 
 	// Adds a post entry to the posts table
@@ -85,9 +107,9 @@ class Database
 		$body = $this->$mysql_connection->real_escape_string($body);	
 
 		$query = "insert into posts(
-			is_reply, replies_to, title, post_body, image_file_name, poster_ip, poster_country, is_staff_post, staff_username
+			is_reply, replies_to, title, post_body, image_file_name, poster_ip, poster_country, is_staff_post, staff_username, approved
 		) values (
-			$is_reply, $replies_to, '$title', '$body', '$image_file', '$poster_ip', '$poster_country', $is_staff_post, '$staff_username'
+			$is_reply, $replies_to, '$title', '$body', '$image_file', '$poster_ip', '$poster_country', $is_staff_post, '$staff_username', 0
 		);";
 
 		echo $query;
