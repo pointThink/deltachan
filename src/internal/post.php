@@ -23,6 +23,7 @@ class Post
 	public function display()
 	{
 		echo "<div class=post>";
+		echo "<img src='/$this->image_file'><br>";
 		echo "$this->id | $this->board<br>";
 		echo "$this->creation_time | $this->last_bump_time<br>";
 		echo "$this->title<br>";

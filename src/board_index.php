@@ -21,11 +21,13 @@ include_once "internal/database.php";
 		</div>
 
 		<div class=post_form>
-			<form action=/internal/actions/post.php method=POST>
+			<form action=/internal/actions/post.php method=POST enctype="multipart/form-data">
 				<p>Title</p>
 				<input type=text name=title>
 				<p>Comment</p>
 				<textarea name=comment></textarea>
+				<p>File</p>
+				<input type=file name=file id=file>
 				<br>
 				<button type=submit>Submit</button>
 				
