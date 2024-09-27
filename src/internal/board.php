@@ -1,7 +1,10 @@
 <?php
-function create_board()
+include_once "database.php";
+
+function board_create($database, $id, $title, $subtitle = "")
 {
-	
+	$database->setup_board_database($id);
+	$database->add_board_info_row($id, $title, $subtitle);
 }
 
 class Board

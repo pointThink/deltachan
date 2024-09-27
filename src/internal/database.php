@@ -42,6 +42,33 @@ class Database
 		");
 	}
 
+	public function setup_board_info_database()
+	{
+		$this->query("create database if not exists board_info;");
+		
+		$this->$mysql_connection->select_db("board_info");
+
+		$this->query("
+			create table if not exists board_info (
+				id varchar(255) not null primary key,
+				title varchar(255) not null,
+				subtitle varchar(255)
+			);
+		");
+	}
+
+	public function add_board_info_row($id, $title, $subtitle)
+	{
+		$this->$mysql_connection->select_db("board_info");
+		$this->query("
+			insert into board_info (
+				id, title, subtitle
+			) values (
+				'$id', '$title', '$subtitle'
+			);
+		");
+	}
+
 	// Adds a post entry to the posts table
 	// Does not upload any attachments!
 	public function write_post($board_id, $is_reply, $replies_to, $title, $body, $image_file, $poster_ip, $poster_country, $is_staff_post, $staff_username)
