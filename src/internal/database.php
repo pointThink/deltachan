@@ -1,4 +1,6 @@
 <?php
+include_once "post.php";
+
 class Database
 {
 	private $mysql_connection;
@@ -64,6 +66,40 @@ class Database
 		echo $query;
 
 		$this->query($query);
+	}
+
+	// returns a post object
+	public function read_post($board, $id)
+	{
+		$post = new Post();
+
+		$this->$mysql_connection->select_db($board);
+		$query_result = $this->query("select * from posts where id = $id;");
+
+		if ($query_result->num_rows <= 0)
+			return null;
+
+		$post_array = $query_result->fetch_array();
+
+		$post->board = $board;
+		$post->id = $id;
+		$post->is_reply = $post_array["is_reply"];
+		$post->replies_to = $post_array["replies_to"];
+		
+		$post->creation_time = $post_array["creation_time"];
+		$post->bump_time = $post_array["bump_time"];
+
+		$post->body = $post_array["post_body"];
+		$post->title = $post_array["title"];
+		$post->image_file = $post_array["image_file_name"];
+
+		$post->poster_ip = $post_array["poster_ip"];
+		$post->poster_country = $post_array["poster_country"];
+
+		$post->is_staff_post = $post_array["is_staff_post"];
+		$post->staff_username = $post_array["staff_username"];
+
+		return $post;
 	}
 
 	private function query($str)
