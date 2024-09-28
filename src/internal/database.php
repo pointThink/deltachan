@@ -159,7 +159,7 @@ class Database
 
 	public function update_post_file($board, $id, $file)
 	{
-		$this->$mysql_connection->select_db("pointchan");
+		$this->$mysql_connection->select_db("deltachan");
 		$file = $this->$mysqli_connection->real_escape_string($file);
 
 		$this->query("
