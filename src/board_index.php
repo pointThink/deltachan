@@ -18,7 +18,7 @@ include_once "internal/ui.php";
 				$board = $database->get_board($board_id);
 
 				echo "<h2>/$board->id/ - $board->title</h2>";
-				echo "<h4>$board->subtitle</h3>";
+				echo "<h4>$board->subtitle</h4>";
 			?>
 		</div>
 

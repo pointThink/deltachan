@@ -31,6 +31,12 @@ body {
 	box-sizing: border-box;
 }
 
+.reply {
+	overflow-x: auto;
+	padding: 0.2cm;
+	margin: 0.2cm;
+}
+
 .post pre {
   text-wrap: wrap;
 }
@@ -68,4 +74,8 @@ body {
 .post {
 	background: #cfd8ff;
 	border: 1px solid black;
+}
+
+.reply {
+	background: #b7c0ed;
 }

@@ -1,6 +1,9 @@
 <?php
 include "internal/database.php";
+include "internal/ui.php";
+
 $database = new Database();
+$post = $database->read_post($board_id, $_GET["id"]);
 ?>
 
 <!DOCTYPE html>
@@ -22,9 +25,20 @@ $database = new Database();
 			?>
 		</div>
 
+		<div class=post_form>
+			<?php
+				(new PostForm("/internal/actions/post.php", "POST"))
+					->add_text_area("Comment", "comment")
+					->add_file("File", "file")
+					->add_hidden_data("board", "$board_id")
+					->add_hidden_data("is_reply", 1)
+					->add_hidden_data("replies_to", $post->id)
+					->finalize();
+			?>
+		</div>
+
 		<div id=posts>
 			<?php
-				$post = $database->read_post($board_id, $_GET["id"]);
 				$post->display();
 			?>
 		</div>

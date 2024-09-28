@@ -20,6 +20,8 @@ class Post
 	public $is_staff_post;
 	public $staff_username;
 
+	public $replies = array();
+
 	public function display()
 	{
 		echo "<div class=post>";
@@ -28,6 +30,23 @@ class Post
 			echo "<a href=/$this->image_file><img class=post_attachment src='/$this->image_file'></a>";
 		
 		echo "<a href=/$this->board/post.php?id=$this->id><p class=post_id>>$this->id | $this->creation_time</p></a>";
+		echo "<h4>$this->title</h4>";
+		echo "<pre>$this->body</pre>";
+
+		foreach ($this->replies as $reply)
+			$reply->display_reply();
+
+		echo "</div>";
+	}
+
+	public function display_reply()
+	{
+		echo "<div class=reply>";
+
+		if ($this->image_file != "")
+			echo "<a href=/$this->image_file><img class=post_attachment src='/$this->image_file'></a>";
+		
+		echo "<p class=post_id>>$this->id | $this->creation_time</p>";
 		echo "<h4>$this->title</h4>";
 		echo "<pre>$this->body</pre>";
 		echo "</div>";

@@ -21,4 +21,7 @@ if ($_FILES["file"]["size"] > 0)
 	$database->update_post_file($result->board, $result->id, $target_file);
 }
 
-// header("Location: /$result->board/post.php?id=$result->id");
+if ($_POST["is_reply"])
+	header("Location: /$result->board/post.php?id=$result->replies_to");
+else
+	header("Location: /$result->board/post.php?id=$result->id");

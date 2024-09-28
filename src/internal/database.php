@@ -183,7 +183,26 @@ class Database
 		$post->is_staff_post = $post_array["is_staff_post"];
 		$post->staff_username = $post_array["staff_username"];
 
+		if (!$post_array["is_reply"])
+			$post->replies = $this->get_post_replies($board, $id);
+
 		return $post;
+	}
+
+	public function get_post_replies($board, $post)
+	{
+		$replies = array();
+		$this->$mysql_connection->select_db($board);
+		$id_str = strval($post);
+
+		$result = $this->query("
+			select id from posts where is_reply = 1 and replies_to = $id_str;
+		");
+
+		while ($reply = $result->fetch_assoc())
+			array_push($replies, $this->read_post($board, $reply["id"]));
+
+		return $replies;
 	}
 
 	private function query($str)
