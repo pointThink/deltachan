@@ -37,6 +37,18 @@ body {
 	margin: 0.2cm;
 }
 
+.greentext {
+	color: #008332;
+}
+
+.orangetext {
+	color: #da7c00;
+}
+
+.bluetext {
+	color: #0062ff;
+}
+
 .post pre {
   text-wrap: wrap;
 }
