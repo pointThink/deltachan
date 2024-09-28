@@ -9,5 +9,7 @@ $database = new Database();
 $database->setup_meta_info_database();
 board_create($database, "def", "Default board");
 
+$database->write_staff_account("admin", hash("sha512", "admin"), "admin");
+
 unlink(__DIR__ . "/../first_run");
 header("Location: /index.php");

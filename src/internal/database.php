@@ -57,6 +57,15 @@ class Database
 				subtitle varchar(255)
 			);
 		");
+
+		$this->query("
+			create table if not exists staff_accounts (
+				username varchar(30) not null primary key,
+				password_hash varchar(128) not null,
+				role varchar(128) not null,
+				contact_email varchar(128)
+			);
+		");
 	}
 
 	public function add_board_info_row($id, $title, $subtitle)
@@ -211,6 +220,17 @@ class Database
 			array_push($replies, $this->read_post($board, $reply["id"]));
 
 		return $replies;
+	}
+
+	public function write_staff_account($username, $password_hash, $role, $contact_email = "")
+	{
+		$this->query("
+			insert into staff_accounts (
+				username, password_hash, role, contact_email
+			) values (
+				'$username', '$password_hash', '$role', '$contact_email'
+			);
+		");
 	}
 
 	private function query($str)
