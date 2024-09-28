@@ -35,6 +35,13 @@ include_once "internal/ui.php";
 
 		<div id="posts">
 			<?php
+				function sort_func($o1, $o2)
+				{
+					return $o1->bump_time < $o2->bump_time;
+				}
+
+				usort($board->posts, "sort_func");
+
 				foreach ($board->posts as $post)
 					$post->display();
 			?>	

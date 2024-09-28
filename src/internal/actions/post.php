@@ -22,6 +22,9 @@ if ($_FILES["file"]["size"] > 0)
 }
 
 if ($_POST["is_reply"])
+{
+	$database->bump_post($result->board, $result->replies_to);
 	header("Location: /$result->board/post.php?id=$result->replies_to");
+}
 else
 	header("Location: /$result->board/post.php?id=$result->id");

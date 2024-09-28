@@ -140,6 +140,17 @@ class Database
 		return $this->read_post($board_id, $this->$mysqli_connection->insert_id);
 	}
 
+	public function bump_post($board, $id)
+	{
+		$this->$mysql_connection->select_db($board);
+		
+		$this->query("
+			update posts
+			set bump_time = current_timestamp
+			where id = $id;
+		");
+	}
+
 	public function update_post_file($board, $id, $file)
 	{
 		$this->$mysql_connection->select_db($board);

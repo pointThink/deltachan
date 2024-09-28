@@ -88,7 +88,7 @@ class Post
 		
 		echo "<p class=post_id>>$this->id | $this->creation_time</p>";
 		echo "<h4>$this->title</h4>";
-		echo "<pre>$this->body</pre>";
+		$this->format_and_show_text($this->body);
 		echo "</div>";
 	}
 }
