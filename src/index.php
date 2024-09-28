@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <?php
 	include_once "internal/database.php";
-	include_once "internal/board.php";
+
+	if (is_file("first_run"))
+	{
+		header("Location: /internal/first_run.php");
+		die();
+	}
 
 	$database = new Database();
-	$database->setup_meta_info_database();
-
-	// board_create($database, "test", "Test board", "This is a test board");
-	// $database->write_post("test", false, 0, "Title", "Post body", "image.png", "1.1.1.1", "pl", 0, "");
 ?>
 
 <html>
