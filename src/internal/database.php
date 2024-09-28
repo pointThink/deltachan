@@ -17,12 +17,11 @@ class Database
 	// Sets up a database with necesary tables for a board 
 	public function setup_board_database($board_id)
 	{
-		$this->query("create database if not exists $board_id;");
 
-		$this->$my_sql_connection->select_db("$board_id");
+		$this->$my_sql_connection->select_db("deltachan");
 
 		$this->query("
-			create table if not exists posts (
+			create table if not exists posts_$board_id (
 				id int not null auto_increment primary key,
 				is_reply int not null,
 				replies_to int,
@@ -47,9 +46,9 @@ class Database
 
 	public function setup_meta_info_database()
 	{
-		$this->query("create database if not exists meta;");
+		$this->query("create database if not exists deltachan;");
 		
-		$this->$mysql_connection->select_db("meta");
+		$this->$mysql_connection->select_db("deltachan");
 
 		$this->query("
 			create table if not exists board_info (
@@ -62,7 +61,7 @@ class Database
 
 	public function add_board_info_row($id, $title, $subtitle)
 	{
-		$this->$mysql_connection->select_db("meta");
+		$this->$mysql_connection->select_db("deltachan");
 		$this->query("
 			insert into board_info (
 				id, title, subtitle
@@ -75,7 +74,7 @@ class Database
 	// Fetches all the boards on the chan
 	public function get_boards()
 	{
-		$this->$mysql_connection->select_db("meta");
+		$this->$mysql_connection->select_db("deltachan");
 		$query_result = $this->query("select * from board_info;");
 		$boards = array();
 
@@ -93,7 +92,7 @@ class Database
 
 	public function get_board($board_id)
 	{
-		$this->$mysql_connection->select_db("meta");
+		$this->$mysql_connection->select_db("deltachan");
 		$query_result = $this->query("select * from board_info where id = '$board_id';");
 		$board_array = $query_result->fetch_array();
 		$board = new Board();
@@ -102,8 +101,7 @@ class Database
 		$board->title = $board_array["title"];
 		$board->subtitle = $board_array["subtitle"];
 
-		$this->$mysql_connection->select_db($board_id);			
-		$query_result = $this->query("select id from posts where is_reply = 0;");
+		$query_result = $this->query("select id from posts_$board_id where is_reply = 0;");
 		
 		while ($post_id = $query_result->fetch_assoc())
 		{
@@ -117,7 +115,7 @@ class Database
 	// Does not upload any attachments!
 	public function write_post($board_id, $is_reply, $replies_to, $title, $body, $poster_ip, $poster_country, $is_staff_post, $staff_username)
 	{
-		$this->$mysql_connection->select_db($board_id);
+		$this->$mysql_connection->select_db("deltachan");
 
 		if (!$is_reply) $replies_to = 0;
 		if (!$is_staff_post) $staff_username = "";
@@ -128,7 +126,7 @@ class Database
 		$title = $this->$mysql_connection->real_escape_string($title);
 		$body = $this->$mysql_connection->real_escape_string($body);	
 
-		$query = "insert into posts(
+		$query = "insert into posts_$board_id(
 			is_reply, replies_to, title, post_body, poster_ip, poster_country, is_staff_post, staff_username, approved
 		) values (
 			$is_reply, $replies_to, '$title', '$body', '$poster_ip', '$poster_country', $is_staff_post, '$staff_username', 0
@@ -142,10 +140,9 @@ class Database
 
 	public function bump_post($board, $id)
 	{
-		$this->$mysql_connection->select_db($board);
-		
+		$this->$mysql_connection->select_db("deltachan");	
 		$this->query("
-			update posts
+			update posts_$board
 			set bump_time = current_timestamp
 			where id = $id;
 		");
@@ -153,11 +150,11 @@ class Database
 
 	public function update_post_file($board, $id, $file)
 	{
-		$this->$mysql_connection->select_db($board);
+		$this->$mysql_connection->select_db("pointchan");
 		$file = $this->$mysqli_connection->real_escape_string($file);
 
 		$this->query("
-			update posts
+			update posts_$board
 			set image_file_name = '$file'
 			where id = $id;
 		");
@@ -168,8 +165,8 @@ class Database
 	{
 		$post = new Post();
 
-		$this->$mysql_connection->select_db($board);
-		$query_result = $this->query("select * from posts where id = $id;");
+		$this->$mysql_connection->select_db("deltachan");
+		$query_result = $this->query("select * from posts_$board where id = $id;");
 
 		if ($query_result->num_rows <= 0)
 			return null;
@@ -203,11 +200,11 @@ class Database
 	public function get_post_replies($board, $post)
 	{
 		$replies = array();
-		$this->$mysql_connection->select_db($board);
+		$this->$mysql_connection->select_db("deltachan");
 		$id_str = strval($post);
 
 		$result = $this->query("
-			select id from posts where is_reply = 1 and replies_to = $id_str;
+			select id from posts_$board where is_reply = 1 and replies_to = $id_str;
 		");
 
 		while ($reply = $result->fetch_assoc())
