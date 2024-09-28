@@ -1,5 +1,6 @@
 <?php
 include_once "internal/database.php";
+include_once "internal/ui.php";
 ?>
 
 <!DOCTYPE html>
@@ -22,19 +23,14 @@ include_once "internal/database.php";
 		</div>
 
 		<div class=post_form>
-			<form action=/internal/actions/post.php method=POST enctype="multipart/form-data">
-				<p>Title</p>
-				<input type=text name=title>
-				<p>Comment</p>
-				<textarea name=comment></textarea>
-				<p>File</p>
-				<input type=file name=file id=file>
-				<br>
-				<button type=submit>Submit</button>
-				
-				<input type=hidden name=is_reply value=0>
-				<?php echo "<input type=hidden name=board value=$board_id>" ?>
-			</form>
+			<?php
+				(new PostForm("/internal/actions/post.php", "POST"))
+					->add_text_field("Title", "title")
+					->add_text_area("Comment", "comment")
+					->add_file("File", "file")
+					->add_hidden_data("board", "$board_id")
+					->finalize();
+			?>
 		</div>
 
 		<div id="posts">

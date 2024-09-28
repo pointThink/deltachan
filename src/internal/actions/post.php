@@ -1,4 +1,6 @@
 <?php
+echo var_dump($_POST);
+
 $file_upload_dir = "uploads/";
 $target_file = $file_upload_dir . basename($_FILES["file"]["name"]);
 
@@ -15,4 +17,4 @@ if (!is_dir(__DIR__ . "/../../" . $file_upload_dir))
 
 move_uploaded_file($_FILES["file"]["tmp_name"], __DIR__ . "/../../" . $target_file);
 
-header("Location: /$board_id/");
+header("Location: /$board_id/post.php");
