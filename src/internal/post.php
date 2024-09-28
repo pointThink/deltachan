@@ -23,7 +23,10 @@ class Post
 	public function display()
 	{
 		echo "<div class=post>";
-		echo "<a href=/$this->image_file><img class=post_attachment src='/$this->image_file'></a>";
+
+		if ($this->image_file != "")
+			echo "<a href=/$this->image_file><img class=post_attachment src='/$this->image_file'></a>";
+		
 		echo "<a href=/$this->board/post.php?id=$this->id><p class=post_id>>$this->id | $this->creation_time</p></a>";
 		echo "<h4>$this->title</h4>";
 		echo "<pre>$this->body</pre>";

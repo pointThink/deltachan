@@ -115,7 +115,7 @@ class Database
 
 	// Adds a post entry to the posts table
 	// Does not upload any attachments!
-	public function write_post($board_id, $is_reply, $replies_to, $title, $body, $image_file, $poster_ip, $poster_country, $is_staff_post, $staff_username)
+	public function write_post($board_id, $is_reply, $replies_to, $title, $body, $poster_ip, $poster_country, $is_staff_post, $staff_username)
 	{
 		$this->$mysql_connection->select_db($board_id);
 
@@ -129,12 +129,27 @@ class Database
 		$body = $this->$mysql_connection->real_escape_string($body);	
 
 		$query = "insert into posts(
-			is_reply, replies_to, title, post_body, image_file_name, poster_ip, poster_country, is_staff_post, staff_username, approved
+			is_reply, replies_to, title, post_body, poster_ip, poster_country, is_staff_post, staff_username, approved
 		) values (
-			$is_reply, $replies_to, '$title', '$body', '$image_file', '$poster_ip', '$poster_country', $is_staff_post, '$staff_username', 0
+			$is_reply, $replies_to, '$title', '$body', '$poster_ip', '$poster_country', $is_staff_post, '$staff_username', 0
 		);";
 
-		$this->query($query);
+		$query_result = $this->query($query);
+
+		// return the newly created post
+		return $this->read_post($board_id, $this->$mysqli_connection->insert_id);
+	}
+
+	public function update_post_file($board, $id, $file)
+	{
+		$this->$mysql_connection->select_db($board);
+		$file = $this->$mysqli_connection->real_escape_string($file);
+
+		$this->query("
+			update posts
+			set image_file_name = '$file'
+			where id = $id;
+		");
 	}
 
 	// returns a post object
