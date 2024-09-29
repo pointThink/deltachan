@@ -3,8 +3,6 @@ session_start();
 
 include_once "database.php";
 
-$database = new Database();
-
 class StaffAccountInfo
 {
 	public $username;
@@ -22,7 +20,7 @@ enum LoginResult
 
 function staff_login($username, $password_hash)
 {
-	global $database;
+	$database = new Database();
 	$account = $database->read_staff_account($username);
 
 	if ($account == NULL)
@@ -39,7 +37,7 @@ function staff_login($username, $password_hash)
 
 function staff_session_is_valid()
 {
-	global $database;
+	$database = new Database();
 	if (!isset($_SESSION["staff_username"]) || !isset($_SESSION["staff_password_hash"]))
 		return false;
 	

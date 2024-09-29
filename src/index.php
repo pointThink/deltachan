@@ -4,7 +4,7 @@
 
 	if (is_file("first_run"))
 	{
-		header("Location: /internal/first_run.php");
+		header("Location: /first_setup.php");
 		die();
 	}
 

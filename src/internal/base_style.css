@@ -113,3 +113,37 @@ body {
 	display: inline-block;
 }
 
+#setup_page {
+  padding: 1cm;
+}
+
+#setup_page h1 {
+  margin: 0px;
+  font-size: 20px;
+}
+
+#setup_page h2 {
+  margin: 0px;
+  font-size: 18px;
+}
+
+#setup_page .important {
+  display: inline-block;
+  color: red;
+}
+
+#setup_page p {
+  font-size: 14px;
+  margin: 0px;
+}
+
+#setup_page label {
+  margin-bottom: 0.2cm;
+  font-size: 14px;
+  display: inline-block;
+  width: 3cm;
+}
+
+#setup_page button {
+  font-size: 14px;
+}

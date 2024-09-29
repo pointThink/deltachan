@@ -2,6 +2,7 @@
 include_once __DIR__ . "/post.php";
 include_once __DIR__ . "/board.php";
 include_once __DIR__ . "/staff_session.php";
+include_once __DIR__ . "/config.php";
 
 class Database
 {
@@ -9,7 +10,8 @@ class Database
 
 	public function __construct()
 	{
-		$this->$mysql_connection = new mysqli("localhost", "root", "root");
+		global $deltachan_config;
+		$this->$mysql_connection = new mysqli($deltachan_config["database_host"], $deltachan_config["database_user"], $deltachan_config["database_password"]);
 
 		if ($this->$mysql_connection->connection_error)
 			die("Connection failed: $this->$mysql_connection->connection_error");

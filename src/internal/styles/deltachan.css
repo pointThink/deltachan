@@ -6,11 +6,17 @@ body {
 
 .post {
 	background: #cfd8ff;
-	border: 1px solid black;
 }
 
 .reply {
 	background: #b7c0ed;
+}
+
+.reply, .post {
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 #topbar {
@@ -25,3 +31,4 @@ body {
 a:link, a:visited {
   color: #1e274d;
 }
+
