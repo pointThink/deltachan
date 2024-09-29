@@ -23,6 +23,11 @@ include_once "internal/staff_session.php";
 
 				echo "<h2>/$board->id/ - $board->title</h2>";
 				echo "<h4>$board->subtitle</h4>";
+
+				if ($mod_mode)
+				{
+					echo "<a href=/internal/actions/staff/logout.php>Logout from staff account</a><br><br>";
+				}
 			?>
 		</div>
 

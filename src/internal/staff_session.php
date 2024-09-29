@@ -54,7 +54,7 @@ function staff_session_is_valid()
 	return true;
 }
 
-function staff_session_logout()
+function staff_logout()
 {
 	unset($_SESSION["staff_username"]);
 	unset($_SESSION["staff_password_hash"]);
