@@ -83,6 +83,16 @@ class Database
 		");
 	}
 
+	public function edit_board_info($id, $title, $subtitle)
+	{
+		$this->$mysql_connection->select_db("deltachan");
+		$this->query("
+			update board_info
+			set title = '$title', subtitle = '$subtitle'
+			where id = '$id';
+		");
+	}
+
 	// Fetches all the boards on the chan
 	public function get_boards()
 	{

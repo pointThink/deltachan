@@ -49,7 +49,7 @@
 					<ul>
 						<li><a href=/internal/actions/staff/chan_setup.php>(TODO) Setup imageboard</a></li>
 						<li><a href=/internal/actions/staff/manage_accounts.php>(TODO) Manage accounts</a></li>
-						<li><a href=/internal/actions/staff/manage_boards.php>(TODO) Manage boards</a></li>
+						<li><a href=/internal/staff_forms/manage_boards.php>Manage boards</a></li>
 					</ul>";
 				}
 			?>

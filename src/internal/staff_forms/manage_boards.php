@@ -1,6 +1,6 @@
 <?php
-include_once "../../database.php";
-include_once "../../staff_session.php";
+include_once "../database.php";
+include_once "../staff_session.php";
 
 if (!staff_session_is_valid())
 	die("You are not allowed here");
@@ -10,11 +10,11 @@ if (!staff_session_is_valid())
 <html>
 	<head>
 		<title>Manage boards</title>
-		<?php include "../../link_css.php" ?>
+		<?php include "../link_css.php" ?>
 	</head>
 
 	<body>
-		<?php include "../../../topbar.php" ?>
+		<?php include "../../topbar.php" ?>
 		
 		<h1 class=title>Manage boards</h1>
 
@@ -37,7 +37,7 @@ if (!staff_session_is_valid())
 						<td>$board->id</td>
 						<td>$board->title</td>
 						<td>$board->subtitle</td>
-						<td><a href=#>Edit (TODO)</a></td>
+						<td><a href=/internal/actions/staff/edit_board.php?id=$board->id>Edit</a></td>
 					</tr>
 					";
 				}
@@ -46,6 +46,6 @@ if (!staff_session_is_valid())
 
 		<a class=manage_link href=/internal/actions/staff/add_board.php>Add board</a>
 
-		<?php include "../../../footer.php" ?>
+		<?php include "../../footer.php" ?>
 	</body>
 </html>
