@@ -59,5 +59,7 @@ include_once "internal/staff_session.php";
 					$post->display($mod_mode);
 			?>	
 		</div>
+
+		<?php include "footer.php" ?>
 	</body>
 </html>

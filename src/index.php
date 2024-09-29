@@ -29,6 +29,8 @@
 			{
 				echo "<a href=$board->id/>$board->title</a>";
 			}
+
+			include "footer.php";
 		?>
 	</body>
 </html>

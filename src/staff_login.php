@@ -30,6 +30,8 @@ include_once "internal/ui.php";
 				->add_password_field("Password", "password")
 				->finalize();
 			echo "</div>";
+
+			include "footer.php";
 		?>
 	</body>
 </html>

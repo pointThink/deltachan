@@ -63,5 +63,7 @@
 				<li><a href=/internal/actions/staff/manage_bans.php>Manage bans</a></li>
 			</ul>
 		</div>
+
+		<?php include "footer.php" ?>
 	</body>
 </html>

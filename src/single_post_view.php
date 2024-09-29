@@ -52,5 +52,7 @@ $post = $database->read_post($board_id, $_GET["id"]);
 				$post->display();
 			?>
 		</div>
+
+		<?php include "footer.php" ?>
 	</body>
 </html>
