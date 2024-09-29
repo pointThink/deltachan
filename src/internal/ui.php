@@ -20,6 +20,16 @@ class PostForm
 		return $this;
 	}
 
+	public function add_password_field($label, $name, $value = "")
+	{
+		$this->buffer .= "<tr>";
+		$this->buffer .= "<th>$label</th>";
+		$this->buffer .= "<td><input type=password name=$name value='$value'></td>";
+		$this->buffer .= "</tr>";
+
+		return $this;
+	}
+
 	public function add_text_area($label, $name, $value="")
 	{
 		$this->buffer .= "<tr>";

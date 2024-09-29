@@ -247,6 +247,10 @@ class Database
 			select * from staff_accounts where username='$username'
 		");
 
+		
+		if ($result->num_rows <= 0)
+			return NULL;
+
 		$account_array = $result->fetch_array();
 
 		$account_info->username = $username;
