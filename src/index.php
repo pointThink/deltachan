@@ -21,16 +21,24 @@
 		<?php
 			include "topbar.php";
 		?>
-		<h1>Boards</h1>
-		<?php
-			$boards = $database->get_boards();
 
-			foreach ($boards as $board)
-			{
-				echo "<a href=$board->id/>$board->title</a>";
-			}
+		<br>
 
-			include "footer.php";
-		?>
+		<div class=list>
+			<h3 class=list_title>Boards</h3>
+			<div class=list_content>
+			<?php
+				$boards = $database->get_boards();
+
+				foreach ($boards as $board)
+				{
+					echo "<a href=$board->id/>$board->title</a><br>";
+				}
+
+			?>
+			</div>
+		</div>
+
+		<?php include "footer.php"; ?>
 	</body>
 </html>

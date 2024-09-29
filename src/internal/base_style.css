@@ -194,3 +194,20 @@ body {
 	text-align: center;
 	display: block;
 }
+
+.list {
+	border: 1px solid black;
+
+	width: 16cm;
+	font-size: 14px;
+	margin: auto;
+}
+
+.list .list_title {
+	margin: 0px;
+	padding: 0.1cm;
+}
+
+.list .list_content {
+	padding: 0.1cm;
+}

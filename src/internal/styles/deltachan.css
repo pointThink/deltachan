@@ -51,3 +51,11 @@ a:link, a:visited {
 .manage_table td {
 	background-color: white;
 }
+
+.list {
+	background: white;
+}
+
+.list .list_title {
+	background-color: #7d95ff;
+}
