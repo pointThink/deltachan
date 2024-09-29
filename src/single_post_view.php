@@ -9,19 +9,28 @@ $post = $database->read_post($board_id, $_GET["id"]);
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Board index</title>
+		<?php
+			$database = new Database();
+			$board = $database->get_board($board_id);
+			echo "<title>/$board->id/ - $post->title</title>";			
+		?>
 		<link href="/internal/base_style.css" rel=stylesheet>
 	</head>
 
 	<body>
+		<?php include "topbar.php" ?>
+
 		<div id="board_index_header">
 			<?php
-				$database = new Database();
-
-				$board = $database->get_board($board_id);
+				$mod_mode = staff_session_is_valid();
 
 				echo "<h2>/$board->id/ - $board->title</h2>";
-				echo "<h4>$board->subtitle</h3>";
+				echo "<h4>$board->subtitle</h4>";
+
+				if ($mod_mode)
+				{
+					echo "<a href=/internal/actions/staff/logout.php>Logout from staff account</a><br><br>";
+				}
 			?>
 		</div>
 

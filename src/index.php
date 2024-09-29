@@ -14,9 +14,13 @@
 <html>
 	<head>
 		<title>Index</title>
+		<link href="/internal/base_style.css" rel=stylesheet> 	
 	</head>
 
 	<body>
+		<?php
+			include "topbar.php";
+		?>
 		<h1>Boards</h1>
 		<?php
 			$boards = $database->get_boards();

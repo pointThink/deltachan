@@ -17,6 +17,10 @@ include_once "internal/staff_session.php";
 	</head>
 
 	<body>
+		<?php
+			include "topbar.php";
+		?>
+
 		<div id="board_index_header">
 			<?php
 				$mod_mode = staff_session_is_valid();
