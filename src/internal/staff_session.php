@@ -57,3 +57,9 @@ function staff_logout()
 	unset($_SESSION["staff_username"]);
 	unset($_SESSION["staff_password_hash"]);
 }
+
+function staff_get_current_user()
+{
+	$database = new Database();
+	return $database->read_staff_account($_SESSION["staff_username"]);
+}

@@ -19,7 +19,7 @@ include_once "internal/ui.php";
 
 				if ($_GET["result"] == "success")
 				{
-					header("Location: /index.php");
+					header("Location: /staff_dashboard.php");
 					die();
 				}
 			}

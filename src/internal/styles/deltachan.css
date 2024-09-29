@@ -32,3 +32,6 @@ a:link, a:visited {
   color: #1e274d;
 }
 
+#staff_dashboard_content {
+  background: white;
+}

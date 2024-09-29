@@ -10,6 +10,27 @@ body {
 	text-align: center;
 }
 
+#staff_dashboard_title {
+  text-align: center;
+}
+
+#staff_dashboard_title h4,
+#staff_dashboard_title a,
+#staff_dashboard_content h4,
+#staff_dashboard_content ul,
+#staff_dashboard_content li,
+#staff_dashboard_content a {
+  margin: 0;
+}
+
+#staff_dashboard_content {
+  padding: 1cm;
+  border: 1px solid black;
+  width: 16cm;
+  margin-left: auto;
+	margin-right: auto;
+}
+
 .post_form {
 	max-width: fit-content;
 	margin-left: auto;
@@ -25,19 +46,21 @@ body {
 }
 
 .post_form textarea {
-	height: 3cm;
+	height: 4cm;
 	width: 100%;
 	min-width: 100%;
 	max-width: 100%;
 	margin: 0;
 	padding: 0;
+	width: 8cm;
 	box-sizing: border-box;
 }
 
-.post_form input, .post_form textarea  {
+.post_form input {
 	width: 100%;
 	box-sizing: border-box;
 }
+
 
 #posts {
 	padding: 0.3cm;
