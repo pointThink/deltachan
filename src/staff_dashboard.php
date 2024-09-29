@@ -47,9 +47,9 @@
 				{
 					echo "<h4>Admin actions</h4>
 					<ul>
-						<li><a href=/internal/actions/staff/chan_setup.php>Setup imageboard</a></li>
-						<li><a href=/internal/actions/staff/manage_accounts.php>Manage accounts</a></li>
-						<li><a href=/internal/actions/staff/manage_boards.php>Manage boards</a></li>
+						<li><a href=/internal/actions/staff/chan_setup.php>(TODO) Setup imageboard</a></li>
+						<li><a href=/internal/actions/staff/manage_accounts.php>(TODO) Manage accounts</a></li>
+						<li><a href=/internal/actions/staff/manage_boards.php>(TODO) Manage boards</a></li>
 					</ul>";
 				}
 			?>
@@ -58,9 +58,9 @@
 
 			<h4>Moderator actions</h4>
 			<ul>
-				<li><a href=/internal/actions/staff/approve_posts.php>View unnaproved posts</a></li>
-				<li><a href=/internal/actions/staff/view_reports.php>View reported posts</a></li>
-				<li><a href=/internal/actions/staff/manage_bans.php>Manage bans</a></li>
+				<li><a href=/internal/actions/staff/approve_posts.php>(TODO) View unnaproved posts</a></li>
+				<li><a href=/internal/actions/staff/view_reports.php>(TODO) View reported posts</a></li>
+				<li><a href=/internal/actions/staff/manage_bans.php>(TODO) Manage bans</a></li>
 			</ul>
 		</div>
 

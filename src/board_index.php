@@ -56,9 +56,12 @@ include_once "internal/staff_session.php";
 				usort($board->posts, "sort_func");
 
 				foreach ($board->posts as $post)
-					$post->display($mod_mode);
+					$post->display($mod_mode, true);
 			?>	
 		</div>
+
+		
+		<script src="/internal/board_index.js"></script>	
 
 		<?php include "footer.php" ?>
 	</body>

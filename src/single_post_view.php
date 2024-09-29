@@ -37,6 +37,8 @@ $post = $database->read_post($board_id, $_GET["id"]);
 
 		<div class=post_form>
 			<?php
+				echo "<p id=reply_disclaimer>Replying to >$post->id</p>";
+
 				(new PostForm("/internal/actions/post.php", "POST"))
 					->add_text_area("Comment", "comment")
 					->add_file("File", "file")

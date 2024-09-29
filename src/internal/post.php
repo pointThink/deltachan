@@ -63,7 +63,7 @@ class Post
     	echo "</div>\n";
 	}
 
-	public function display($mod_mode = false)
+	public function display($mod_mode = false, $show_hide_replies_button = false)
 	{
 		echo "<div class=post>";
 
@@ -81,8 +81,13 @@ class Post
 		echo "<h4>$this->title</h4>";
 		$this->format_and_show_text($this->body);
 
+		if (count($this->replies) > 0 & $show_hide_replies_button)
+			echo "<a href='#' class=hide_replies_button id=hide_replies_$this->id onclick='hide_replies(\"$this->id\")'>Hide replies</a>";
+
+		echo "<div id=replies_$this->id>";
 		foreach ($this->replies as $reply)
 			$reply->display_reply($mod_mode);
+		echo "</div>";
 
 		echo "</div>";
 	}

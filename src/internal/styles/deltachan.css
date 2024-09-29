@@ -35,3 +35,11 @@ a:link, a:visited {
 #staff_dashboard_content {
   background: white;
 }
+
+#reply_disclaimer {
+	margin-left: 2px;
+	margin-right: 3px;
+	border: 1px solid black;
+	background: #ff6340;
+	color: black;
+}
