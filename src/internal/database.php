@@ -207,6 +207,15 @@ class Database
 		return $post;
 	}
 
+	public function remove_post($board, $id)
+	{
+		$this->$mysqli_connection->select_db("deltachan");
+
+		$this->query("
+			delete from posts_$board where id = $id;
+		");
+	}
+
 	public function get_post_replies($board, $post)
 	{
 		$replies = array();

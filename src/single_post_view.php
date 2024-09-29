@@ -1,6 +1,6 @@
 <?php
-include "internal/database.php";
-include "internal/ui.php";
+include_once "internal/database.php";
+include_once "internal/ui.php";
 
 $database = new Database();
 $post = $database->read_post($board_id, $_GET["id"]);

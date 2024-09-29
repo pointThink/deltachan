@@ -53,9 +53,11 @@ body {
   text-wrap: wrap;
 }
 
-.post .post_id {
+.post .post_id, .post form {
+	display: inline;
 	font-size: 12px;
 	margin: 0;
+	margin-right: 0.2cm;
 }
 
 .post h4 {

@@ -71,3 +71,31 @@ class PostForm
 		echo $this->buffer;
 	}
 }
+
+class ActionLink
+{
+	private $buffer = "";
+	private $label = "";
+	private $name = "";
+
+	public function __construct($action, $name, $label)
+	{
+		$this->label = $label;
+		$this->name = $name;
+		$this->buffer .= "<form method=POST action='$action' id=$name>";
+	}
+
+	public function finalize()
+	{
+		$this->buffer .= "<a href=# onclick=\"document.forms['$this->name'].submit();\">$this->label</a>";
+		$this->buffer .= "</form>";
+
+		echo $this->buffer;
+	}
+
+	public function add_data($name, $value)
+	{
+		$this->buffer .= "<input type=hidden name=$name value='$value'>";
+		return $this;
+	}
+}

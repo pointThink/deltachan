@@ -1,6 +1,7 @@
 <?php
 include_once "internal/database.php";
 include_once "internal/ui.php";
+include_once "internal/staff_session.php";
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +17,8 @@ include_once "internal/ui.php";
 				$database = new Database();
 
 				$board = $database->get_board($board_id);
+
+				$mod_mode = staff_session_is_valid();
 
 				echo "<h2>/$board->id/ - $board->title</h2>";
 				echo "<h4>$board->subtitle</h4>";
@@ -43,7 +46,7 @@ include_once "internal/ui.php";
 				usort($board->posts, "sort_func");
 
 				foreach ($board->posts as $post)
-					$post->display();
+					$post->display($mod_mode);
 			?>	
 		</div>
 	</body>
