@@ -72,10 +72,11 @@ class Post
 		
 		echo "<a class=post_id href=/$this->board/post.php?id=$this->id>>$this->id | $this->creation_time</a>";
 
-		(new ActionLink("/internal/actions/staff/delete_post.php", "delete_$this->id", "Delete"))
-			->add_data("board", $this->board)
-			->add_data("id", $this->id)
-			->finalize();
+		if ($mod_mode)
+			(new ActionLink("/internal/actions/staff/delete_post.php", "delete_$this->id", "Delete"))
+				->add_data("board", $this->board)
+				->add_data("id", $this->id)
+				->finalize();
 
 		echo "<h4>$this->title</h4>";
 		$this->format_and_show_text($this->body);
@@ -94,6 +95,13 @@ class Post
 			echo "<a href=/$this->image_file><img class=post_attachment src='/$this->image_file'></a>";
 		
 		echo "<p class=post_id>>$this->id | $this->creation_time</p>";
+	
+		if ($mod_mode)
+			(new ActionLink("/internal/actions/staff/delete_post.php", "delete_$this->id", "Delete"))
+				->add_data("board", $this->board)
+				->add_data("id", $this->id)
+				->finalize();
+
 		echo "<h4>$this->title</h4>";
 		$this->format_and_show_text($this->body);
 		echo "</div>";

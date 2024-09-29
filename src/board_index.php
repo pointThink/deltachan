@@ -7,17 +7,18 @@ include_once "internal/staff_session.php";
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Board index</title>
+		<?php
+			$database = new Database();
+			$board = $database->get_board($board_id);
+			echo "<title>/$board->id/ - $board->title</title>";			
+		?>
+
 		<link href="/internal/base_style.css" rel=stylesheet>
 	</head>
 
 	<body>
 		<div id="board_index_header">
 			<?php
-				$database = new Database();
-
-				$board = $database->get_board($board_id);
-
 				$mod_mode = staff_session_is_valid();
 
 				echo "<h2>/$board->id/ - $board->title</h2>";

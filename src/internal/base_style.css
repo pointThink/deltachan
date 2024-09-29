@@ -10,10 +10,26 @@ body {
 
 .post_form {
 	max-width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;	
+}
 
-	max-width: 8cm
+.post_form th {
+	font-size: 12px;
+	padding-left: 0.2cm;
+	padding-right: 0.2cm;
+	border: 1px solid black;
+}
+
+.post_form textarea {
+	height: 3cm;
+	width: 100%;
+	min-width: 100%;
+	max-width: 100%;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 .post_form input, .post_form textarea  {
@@ -77,6 +93,8 @@ body {
 
 	margin-right: 0.2cm;
 }
+
+
 
 /* looks */
 body {
