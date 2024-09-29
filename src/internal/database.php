@@ -133,6 +133,21 @@ class Database
 		return $board;
 	}
 
+	public function remove_board($board_id)
+	{
+		echo $board_id;
+		$this->$mysql_connection->select_db("deltachan");
+		
+		$this->query("
+			drop table posts_$board_id;
+		");
+		
+		$this->query("
+			delete from board_info where id = '$board_id';
+		");
+
+	}
+
 	// Adds a post entry to the posts table
 	// Does not upload any attachments!
 	public function write_post($board_id, $is_reply, $replies_to, $title, $body, $poster_ip, $poster_country, $is_staff_post, $staff_username)

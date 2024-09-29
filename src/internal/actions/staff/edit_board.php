@@ -41,6 +41,10 @@ if (count($_POST) > 0)
 			?>
 		</div>
 
+		<br>
+
+		<?php echo "<a class=manage_link href=/internal/actions/staff/delete_board.php?id=" . $_GET["id"] . ">Delete board</a>" ?>
+
 		<?php include "../../../footer.php" ?>
 	</body>
 </html>
