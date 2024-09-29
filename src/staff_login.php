@@ -15,13 +15,16 @@ include_once "internal/ui.php";
 		
 			if (isset($_GET["result"]))
 			{
-				echo $_GET["result"];
-
 				if ($_GET["result"] == "success")
 				{
 					header("Location: /staff_dashboard.php");
 					die();
 				}
+				else if ($_GET["result"] == "invalid_password")
+					echo '<script async>alert("Wrong password")</script>';
+				else if ($_GET["result"] == "invalid_username")
+					echo '<script async>alert("This user does not exist")</script>';
+
 			}
 			
 			echo "<div class=post_form>";
