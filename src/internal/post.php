@@ -67,9 +67,17 @@ class Post
 	{
 		echo "<div class=post>";
 
+		$file_parts = explode(".", $this->image_file);
+		$thumb_file_name = $file_parts[0] . "-thumb.jpg";
+
 		if ($this->image_file != "")
-			echo "<a href=/$this->image_file><img class=post_attachment src='/$this->image_file'></a>";
-		
+		{
+			if (is_file(__DIR__ . "/../" . $thumb_file_name))
+				echo "<a href=/$this->image_file><img class=post_attachment src='/$thumb_file_name'></a>";
+			else
+				echo "<a href=/$this->image_file><img class=post_attachment src='/$this->image_file'></a>";
+		}
+
 		echo "<a class=post_id href=/$this->board/post.php?id=$this->id>>$this->id | $this->creation_time</a>";
 
 		if ($mod_mode)
@@ -96,9 +104,17 @@ class Post
 	{
 		echo "<div class=reply>";
 
+		$file_parts = explode(".", $this->image_file);
+		$thumb_file_name = $file_parts[0] . "-thumb.jpg";
+
 		if ($this->image_file != "")
-			echo "<a href=/$this->image_file><img class=post_attachment src='/$this->image_file'></a>";
-		
+		{
+			if (is_file(__DIR__ . "/../" . $thumb_file_name))
+				echo "<a href=/$this->image_file><img class=post_attachment src='/$thumb_file_name'></a>";
+			else
+				echo "<a href=/$this->image_file><img class=post_attachment src='/$this->image_file'></a>";
+		}
+
 		echo "<p class=post_id>>$this->id | $this->creation_time</p>";
 	
 		if ($mod_mode)
