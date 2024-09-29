@@ -51,7 +51,7 @@ $post = $database->read_post($board_id, $_GET["id"]);
 
 		<div id=posts>
 			<?php
-				$post->display();
+				$post->display($mod_mode);
 			?>
 		</div>
 
