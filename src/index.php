@@ -14,7 +14,7 @@
 <html>
 	<head>
 		<title>Index</title>
-		<link href="/internal/base_style.css" rel=stylesheet> 	
+		<?php include "internal/link_css.php"; ?>
 	</head>
 
 	<body>

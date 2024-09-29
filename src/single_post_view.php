@@ -12,9 +12,10 @@ $post = $database->read_post($board_id, $_GET["id"]);
 		<?php
 			$database = new Database();
 			$board = $database->get_board($board_id);
-			echo "<title>/$board->id/ - $post->title</title>";			
+			echo "<title>/$board->id/ - $post->title</title>";
+			
+			include "internal/link_css.php";
 		?>
-		<link href="/internal/base_style.css" rel=stylesheet>
 	</head>
 
 	<body>

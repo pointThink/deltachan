@@ -11,9 +11,9 @@ include_once "internal/staff_session.php";
 			$database = new Database();
 			$board = $database->get_board($board_id);
 			echo "<title>/$board->id/ - $board->title</title>";			
+		
+			include "internal/link_css.php";
 		?>
-
-		<link href="/internal/base_style.css" rel=stylesheet>
 	</head>
 
 	<body>

@@ -113,18 +113,3 @@ body {
 	display: inline-block;
 }
 
-/* looks */
-body {
-	background: linear-gradient(180deg, #c9d4ff 0%, #ebefff 100%);
-	color: black;
-	background-attachment: fixed;
-}
-
-.post {
-	background: #cfd8ff;
-	border: 1px solid black;
-}
-
-.reply {
-	background: #b7c0ed;
-}

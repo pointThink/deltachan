@@ -1,0 +1,27 @@
+body {
+	background: linear-gradient(180deg, #c9d4ff 0%, #ebefff 100%);
+	color: black;
+	background-attachment: fixed;
+}
+
+.post {
+	background: #cfd8ff;
+	border: 1px solid black;
+}
+
+.reply {
+	background: #b7c0ed;
+}
+
+#topbar {
+  background: #7d95ff;
+}
+
+.post_form th {
+	background: #7d95ff;
+	border: 1px solid black;
+}
+
+a:link, a:visited {
+  color: #1e274d;
+}
