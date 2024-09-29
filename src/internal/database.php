@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . "/post.php";
 include_once __DIR__ . "/board.php";
+include_once __DIR__ . "/staff_session.php";
 
 class Database
 {
@@ -224,6 +225,8 @@ class Database
 
 	public function write_staff_account($username, $password_hash, $role, $contact_email = "")
 	{
+		$this->$mysql_connection->select_db("deltachan");
+
 		$this->query("
 			insert into staff_accounts (
 				username, password_hash, role, contact_email
@@ -231,6 +234,27 @@ class Database
 				'$username', '$password_hash', '$role', '$contact_email'
 			);
 		");
+	}
+
+	public function read_staff_account($username)
+	{
+		$this->$mysql_connection->select_db("deltachan");
+
+		$account_info = new StaffAccountInfo();
+		$username = $this->$mysqli_connection->real_escape_string($username);
+
+		$result = $this->query("
+			select * from staff_accounts where username='$username'
+		");
+
+		$account_array = $result->fetch_array();
+
+		$account_info->username = $username;
+		$account_info->password_hash = $account_array["password_hash"];
+		$account_info->role = $account_array["role"];
+		$account_info->contact_email = $account_array["contact_email"];
+
+		return $account_info;
 	}
 
 	private function query($str)
