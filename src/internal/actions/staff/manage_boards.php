@@ -44,7 +44,7 @@ if (!staff_session_is_valid())
 			?>
 		</table>
 
-		<a class=manage_link href=#>(TODO) Add board</a>
+		<a class=manage_link href=/internal/actions/staff/add_board.php>Add board</a>
 
 		<?php include "../../../footer.php" ?>
 	</body>
