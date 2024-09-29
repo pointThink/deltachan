@@ -10,7 +10,7 @@ body {
 	text-align: center;
 }
 
-#staff_dashboard_title {
+#staff_dashboard_title, .title {
   text-align: center;
 }
 
@@ -178,4 +178,19 @@ body {
 
 #setup_page button {
   font-size: 14px;
+}
+
+.manage_table {
+	text-align: center;
+	font-size: 14px;
+	width: 16cm;
+	margin: auto;
+}
+
+.manage_table td, .manage_table th {
+}
+
+.manage_link {
+	text-align: center;
+	display: block;
 }

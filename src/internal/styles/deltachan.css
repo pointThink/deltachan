@@ -43,3 +43,11 @@ a:link, a:visited {
 	background: #ff6340;
 	color: black;
 }
+
+.manage_table th {
+	background-color: #7d95ff;
+}
+
+.manage_table td {
+	background-color: white;
+}
