@@ -84,6 +84,12 @@ body {
 	box-sizing: border-box;
 }
 
+.post .your_post {
+	margin: 0px;
+	display: inline-block;
+	font-size: 12px;
+}
+
 .reply {
 	overflow-x: auto;
 	padding: 0.2cm;

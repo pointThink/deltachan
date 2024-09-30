@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include_once "../database.php";
 
 $file_upload_dir = "uploads/";
@@ -34,6 +36,12 @@ if ($_FILES["file"]["size"] > 0)
 	imagecopyresampled($virtual_image, $image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
 	imagejpeg($virtual_image, __DIR__ . "/../../" . $file_upload_dir . "$result->board-$result->id-thumb.jpg");
 }
+
+// keep track of created posts
+if (!isset($_SESSION["users_posts"]))
+	$_SESSION["users_posts"] = array();
+
+array_push($_SESSION["users_posts"], $result->id);
 
 if ($_POST["is_reply"])
 {

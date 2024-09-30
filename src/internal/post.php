@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include_once "ui.php";
 
 class Post
@@ -46,6 +48,8 @@ class Post
     	// italic
 	    $ret = preg_replace('/\*(.+)\*/sU', '<i>$1</i>', $ret);
 
+		// $ret = preg_replace("/>>[0-9]+/sU", "<a href=#>$1</a>", $ret);
+
 		$textParts = explode("\n", $ret);
 
 		echo "<div class=post_text>\n";
@@ -79,6 +83,9 @@ class Post
 		}
 
 		echo "<a class=post_id href=/$this->board/post.php?id=$this->id>>$this->id | $this->creation_time</a>";
+
+		if (in_array($this->id, $_SESSION["users_posts"]))
+			echo "<p class=your_post>(You)</p>";
 
 		if ($mod_mode)
 			(new ActionLink("/internal/actions/staff/delete_post.php", "delete_$this->id", "Delete"))
@@ -116,7 +123,10 @@ class Post
 		}
 
 		echo "<p class=post_id>>$this->id | $this->creation_time</p>";
-	
+
+		if (in_array($this->id, $_SESSION["users_posts"]))
+			echo "<p class=your_post>(You)</p>";
+		
 		if ($mod_mode)
 			(new ActionLink("/internal/actions/staff/delete_post.php", "delete_$this->id", "Delete"))
 				->add_data("board", $this->board)

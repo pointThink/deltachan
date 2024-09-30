@@ -8,6 +8,10 @@ body {
 	background: #cfd8ff;
 }
 
+.post .your_post {
+	color: brown;
+}
+
 .reply {
 	background: #b7c0ed;
 }
