@@ -48,7 +48,21 @@ class Post
     	// italic
 	    $ret = preg_replace('/\*(.+)\*/sU', '<i>$1</i>', $ret);
 
-		// $ret = preg_replace("/>>[0-9]+/sU", "<a href=#>$1</a>", $ret);
+		preg_match('/&gt;&gt;[0-9]+/', $ret, $matches, PREG_OFFSET_CAPTURE);
+		
+		foreach ($matches as $match)
+		{
+			$match_string = $match[0];
+			$id = intval(substr($match[0], 8));
+			
+			if ($_SESSION["users_posts"] != NULL)
+				if (in_array($id, $_SESSION["users_posts"]))
+					$ret = preg_replace("/$match_string/", "<a href=# onclick=scroll_to_post('$id')>$0 (You)</a>", $ret);
+				else
+					$ret = preg_replace("/$match_string/", "<a href=# onclick=scroll_to_post('$id')>$0</a>", $ret);
+			else
+				$ret = preg_replace("/$match_string/", "<a href=# onclick=scroll_to_post('$id')>$0</a>", $ret);
+		}
 
 		$textParts = explode("\n", $ret);
 
@@ -69,7 +83,7 @@ class Post
 
 	public function display($mod_mode = false, $show_hide_replies_button = false)
 	{
-		echo "<div class=post>";
+		echo "<div class=post id=post_$this->id>";
 
 		$file_parts = explode(".", $this->image_file);
 		$thumb_file_name = $file_parts[0] . "-thumb.jpg";
@@ -84,8 +98,9 @@ class Post
 
 		echo "<a class=post_id href=/$this->board/post.php?id=$this->id>>$this->id | $this->creation_time</a>";
 
-		if (in_array($this->id, $_SESSION["users_posts"]))
-			echo "<p class=your_post>(You)</p>";
+		if	($_SESSION["users_posts"] != NULL)
+			if (in_array($this->id, $_SESSION["users_posts"]))
+				echo "<p class=your_post>(You)</p>";
 
 		if ($mod_mode)
 			(new ActionLink("/internal/actions/staff/delete_post.php", "delete_$this->id", "Delete"))
@@ -109,7 +124,7 @@ class Post
 
 	public function display_reply($mod_mode = false)
 	{
-		echo "<div class=reply>";
+		echo "<div class=reply id=post_$this->id>";
 
 		$file_parts = explode(".", $this->image_file);
 		$thumb_file_name = $file_parts[0] . "-thumb.jpg";
@@ -124,8 +139,9 @@ class Post
 
 		echo "<p class=post_id>>$this->id | $this->creation_time</p>";
 
-		if (in_array($this->id, $_SESSION["users_posts"]))
-			echo "<p class=your_post>(You)</p>";
+		if	($_SESSION["users_posts"] != NULL)
+			if (in_array($this->id, $_SESSION["users_posts"]))
+				echo "<p class=your_post>(You)</p>";
 		
 		if ($mod_mode)
 			(new ActionLink("/internal/actions/staff/delete_post.php", "delete_$this->id", "Delete"))

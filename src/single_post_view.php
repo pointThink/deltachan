@@ -16,6 +16,8 @@ $post = $database->read_post($board_id, $_GET["id"]);
 			
 			include "internal/link_css.php";
 		?>
+
+		<script src=/internal/post_display.js></script>
 	</head>
 
 	<body>

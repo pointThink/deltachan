@@ -62,6 +62,7 @@ include_once "internal/staff_session.php";
 
 		
 		<script src="/internal/board_index.js"></script>	
+		<script src=/internal/post_display.js></script>
 
 		<?php include "footer.php" ?>
 	</body>
