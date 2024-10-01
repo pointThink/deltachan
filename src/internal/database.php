@@ -297,6 +297,22 @@ class Database
 		return $account_info;
 	}
 
+	public function get_staff_accounts()
+	{
+		$this->$mysql_connection->select_db("deltachan");
+
+		$result = $this->query("
+			select username from staff_accounts;
+		");
+
+		$accounts = array();
+
+		while ($account = $result->fetch_assoc())
+			array_push($accounts, $this->read_staff_account($account["username"]));
+
+		return $accounts;
+	}
+
 	private function query($str)
 	{
 		return $this->$mysql_connection->query($str);
