@@ -19,10 +19,13 @@ fwrite($config_file, $config_template);
 include_once "../database.php";
 
 $database = new Database();
+$database->manual_login($_POST["database_host"], $_POST["database_user"], $_POST["database_password"]);
 $database->setup_meta_info_database();
 board_create($database, "def", "Default board");
 
-$database->write_staff_account("admin", hash("sha512", "admin"), "admin");
+// if there are existing staff accounts in the db like when updating skip this step
+if (count($database->get_staff_accounts()) <= 0)
+	$database->write_staff_account("admin", hash("sha512", "admin"), "admin");
 
 unlink(__DIR__ . "/../../first_run");
 header("Location: /index.php");

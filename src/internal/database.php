@@ -17,6 +17,14 @@ class Database
 			die("Connection failed: $this->$mysql_connection->connection_error");
 	}
 
+	public function manual_login($host, $user, $password)
+	{
+		$this->$mysql_connection = new mysqli($host, $user, $password);
+
+		if ($this->$mysql_connection->connection_error)
+			die("Connection failed: $this->$mysql_connection->connection_error");
+	}
+
 	// Sets up a database with necesary tables for a board 
 	public function setup_board_database($board_id)
 	{
@@ -74,6 +82,14 @@ class Database
 	public function add_board_info_row($id, $title, $subtitle)
 	{
 		$this->$mysql_connection->select_db("deltachan");
+
+		$result = $this->query("
+			select * from board_info where id = '$id';
+		");
+
+		if ($result->num_rows > 0)
+			return;
+
 		$this->query("
 			insert into board_info (
 				id, title, subtitle
