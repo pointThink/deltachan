@@ -31,8 +31,7 @@ hr {
 }
 
 #topbar {
-  background: #eeaa88;
-  border-bottom: 1px solid #912220;
+  border-bottom: none;
 }
 
 .post_form th {

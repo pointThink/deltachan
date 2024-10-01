@@ -96,7 +96,7 @@ class Post
 				echo "<a href=/$this->image_file><img class=post_attachment src='/$this->image_file'></a>";
 		}
 
-		echo "<a class=post_id href=/$this->board/post.php?id=$this->id>>$this->id | $this->creation_time</a>";
+		echo "<a class=post_id href=/$this->board/post.php?id=$this->id>>>$this->id | $this->creation_time</a>";
 
 		if	($_SESSION["users_posts"] != NULL)
 			if (in_array($this->id, $_SESSION["users_posts"]))
@@ -137,11 +137,25 @@ class Post
 				echo "<a href=/$this->image_file><img class=post_attachment src='/$this->image_file'></a>";
 		}
 
-		echo "<p class=post_id>>$this->id | $this->creation_time</p>";
+		echo "<p class=post_id>>>$this->id | $this->creation_time</p>";
 
 		if	($_SESSION["users_posts"] != NULL)
 			if (in_array($this->id, $_SESSION["users_posts"]))
 				echo "<p class=your_post>(You)</p>";
+
+		$quote_content = "";
+		foreach (explode("\n", $this->body) as $line)
+			$quote_content .= ">$line\n";
+
+		(new ActionLink("/$this->board/post.php", "quote_$this->id", "Quote", "GET"))
+			->add_data("id", $this->replies_to)
+			->add_data("reply_field_content", htmlspecialchars($quote_content))
+			->finalize();
+
+		(new ActionLink("/$this->board/post.php", "reply_$this->id", "Reply", "GET"))
+			->add_data("id", $this->replies_to)
+			->add_data("reply_field_content", htmlspecialchars(">>$this->id"))
+			->finalize();
 		
 		if ($mod_mode)
 			(new ActionLink("/internal/actions/staff/delete_post.php", "delete_$this->id", "Delete"))

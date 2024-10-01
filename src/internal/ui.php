@@ -30,11 +30,11 @@ class PostForm
 		return $this;
 	}
 
-	public function add_text_area($label, $name, $value="")
+	public function add_text_area($label, $name, $value="", $id="")
 	{
 		$this->buffer .= "<tr>";
 		$this->buffer .= "<th>$label</th>";
-		$this->buffer .= "<td><textarea name=$name>$value</textarea>";
+		$this->buffer .= "<td><textarea id=$id name=$name>$value</textarea>";
 		$this->buffer .= "</tr>";
 
 		return $this;
@@ -78,11 +78,11 @@ class ActionLink
 	private $label = "";
 	private $name = "";
 
-	public function __construct($action, $name, $label)
+	public function __construct($action, $name, $label, $method=POST)
 	{
 		$this->label = $label;
 		$this->name = $name;
-		$this->buffer .= "<form method=POST action='$action' id=$name>";
+		$this->buffer .= "<form method=$method action='$action' id=$name>";
 	}
 
 	public function finalize()

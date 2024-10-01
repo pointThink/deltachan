@@ -42,7 +42,7 @@ $post = $database->read_post($board_id, $_GET["id"]);
 				echo "<p id=reply_disclaimer>Replying to >$post->id</p>";
 
 				(new PostForm("/internal/actions/post.php", "POST"))
-					->add_text_area("Comment", "comment")
+					->add_text_area("Comment", "comment", $_GET["reply_field_content"], "reply_comment")
 					->add_file("File", "file")
 					->add_hidden_data("board", "$board_id")
 					->add_hidden_data("is_reply", 1)
