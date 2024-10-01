@@ -78,7 +78,7 @@ class ActionLink
 	private $label = "";
 	private $name = "";
 
-	public function __construct($action, $name, $label, $method=POST)
+	public function __construct($action, $name, $label, $method="POST")
 	{
 		$this->label = $label;
 		$this->name = $name;
