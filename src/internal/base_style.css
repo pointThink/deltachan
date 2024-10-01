@@ -71,6 +71,10 @@ body {
   font-size: 12px;
 }
 
+#footer p {
+	margin: 0;
+}
+
 #posts {
 	padding: 0.3cm;
 }
@@ -86,6 +90,7 @@ body {
 
 .post .your_post {
 	margin: 0px;
+	margin-right: 0.2cm;
 	display: inline-block;
 	font-size: 12px;
 }
@@ -118,6 +123,11 @@ body {
 	margin: 0;
 	margin-right: 0.2cm;
 }
+
+td {
+	display: flex;
+	flex-direction: row;
+}1
 
 .post h4 {
 	margin: 0;

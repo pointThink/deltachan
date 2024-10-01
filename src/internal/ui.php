@@ -44,7 +44,7 @@ class PostForm
 	{
 		$this->buffer .= "<tr>";
 		$this->buffer .= "<th>$label</th>";
-		$this->buffer .= "<td><input type=file name=$name></td>";
+		$this->buffer .= "<td><input class=file_upload type=file multiple name=$name><button type=button class=clear_file onclick=clear_file_upload()>Clear</button></td>";
 		$this->buffer .= "</tr>";
 
 		return $this;
