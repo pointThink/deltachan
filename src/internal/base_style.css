@@ -159,8 +159,8 @@ form .clear_file, form .file_upload {
 #topbar a, #topbar p {
 	padding: 0;
 	margin: 0;
-	margin-right: 0.1cm;
-	margin-left: 0.1cm;
+	margin-right: 0.05cm;
+	margin-left: 0.05cm;
 	font-size: 12px;
 	display: inline-block;
 }
