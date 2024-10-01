@@ -4,8 +4,10 @@ body {
 	background-attachment: fixed;
 }
 
-.post {
-	background: #cfd8ff;
+hr {
+    border: none;
+    background-color: #7d95ff88;
+    height: 1px;
 }
 
 .post .your_post {
@@ -13,10 +15,10 @@ body {
 }
 
 .reply {
-	background: #b7c0ed;
+	background: #cfd8ff;
 }
 
-.reply, .post {
+.reply {
   border-top: 1px solid rgba(255, 255, 255, 0.5);
   border-left: 1px solid rgba(255, 255, 255, 0.5);
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
