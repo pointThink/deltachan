@@ -1,0 +1,75 @@
+body {
+	background: linear-gradient(180deg, #fed6af 0%, #ffffee 20%);
+	color: #912220;
+	background-attachment: fixed;
+}
+
+hr {
+    border: none;
+    background-color: #91222066;
+    height: 1px;
+}
+
+.post .your_post {
+	color: navy;
+}
+
+.reply {
+	background: #f0e0d6;
+}
+
+.post {
+    background-color: none;
+    margin: 0;
+}
+
+.reply {
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+#topbar {
+  background: #eeaa88;
+  border-bottom: 1px solid #912220;
+}
+
+.post_form th {
+	background: #eeaa88;
+	border: 1px solid #912220;
+}
+
+a:link, a:visited {
+  color: blue;
+}
+
+#staff_dashboard_content {
+  background: white;
+}
+
+#reply_disclaimer {
+	margin-left: 2px;
+	margin-right: 3px;
+	border: 1px solid black;
+	background: #ff6340;
+	color: black;
+}
+
+.manage_table th {
+    border: 1px solid #912220;
+	background-color: #eeaa88;
+}
+
+.manage_table td {
+	background-color: white;
+}
+
+.list {
+	background: white;
+    border: 1px solid #912220;
+}
+
+.list .list_title {
+	background-color: #eeaa88;
+}

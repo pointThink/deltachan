@@ -56,7 +56,10 @@ include_once "internal/staff_session.php";
 				usort($board->posts, "sort_func");
 
 				foreach ($board->posts as $post)
+				{
+					echo "<hr>";
 					$post->display($mod_mode, true);
+				}
 			?>	
 		</div>
 
