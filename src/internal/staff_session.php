@@ -39,15 +39,24 @@ function staff_session_is_valid()
 {
 	$database = new Database();
 	if (!isset($_SESSION["staff_username"]) || !isset($_SESSION["staff_password_hash"]))
+	{
+		staff_logout();
 		return false;
+	}
 	
 	$current_user = $database->read_staff_account($_SESSION["staff_username"]);
 
 	if ($current_user == NULL)
+	{
+		staff_logout();
 		return false;
+	}
 
 	if ($current_user->password_hash != $_SESSION["staff_password_hash"])
+	{
+		staff_logout();
 		return false;
+	}
 
 	return true;
 }

@@ -2,7 +2,7 @@
 include_once "../database.php";
 include_once "../staff_session.php";
 
-if (!staff_session_is_valid())
+if (!staff_session_is_valid() || !staff_is_admin()) 
 	die("You are not allowed here");
 ?>
 
@@ -37,7 +37,7 @@ if (!staff_session_is_valid())
 						<td>$account->username</td>
 						<td>$account->role</td>
 						<td>$account->contact_email</td>
-						<td><a href=/internal/actions/staff/edit_account.php?username=$account->username>Edit (TODO)</a></td>
+						<td><a href=/internal/actions/staff/edit_account.php?username=$account->username>Edit</a></td>
 					</tr>
 					";
 				}

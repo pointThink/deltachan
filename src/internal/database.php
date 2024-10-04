@@ -288,6 +288,34 @@ class Database
 		");
 	}
 
+	public function update_staff_account($old_username, $username, $role, $contact_email = "")
+	{
+		$this->$mysql_connection->select_db("deltachan");
+		$this->query("
+			update staff_accounts
+			set username = '$username', role = '$role', contact_email = '$contact_email'
+			where username = '$old_username';
+		");
+	}
+
+	public function update_staff_account_password($username, $password_hash)
+	{
+		$this->$mysql_connection->select_db("deltachan");
+		$this->query("
+			update staff_accounts
+			set password_hash = '$password_hash'
+			where username = '$username';
+		");
+	}
+
+	public function delete_staff_account($username)
+	{
+		$this->$mysql_connection->select_db("deltachan");
+		$this->query("
+			delete from staff_accounts where username = '$username';
+		");
+	}
+
 	public function read_staff_account($username)
 	{
 		$this->$mysql_connection->select_db("deltachan");
