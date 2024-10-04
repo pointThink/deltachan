@@ -15,6 +15,7 @@ foreach ($_POST as $key => $value)
 
 $config_file = fopen($config_path, "w");
 fwrite($config_file, $config_template);
+fclose($config_file);
 
 include_once "../database.php";
 
