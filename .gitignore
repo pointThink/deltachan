@@ -5,3 +5,7 @@ src/test
 src/uploads
 src/def
 site-build
+
+src/first_run
+src/internal/config.php
+src/internal/chanconfig.json
