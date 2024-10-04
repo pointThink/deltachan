@@ -33,15 +33,15 @@ if (count($_POST) > 0)
 		<h1 class="title">Setup imageboard</h1>
 		<?php
 			$database = new Database();
-			$user = $database->read_staff_account($_GET["username"]);
+            $chan_info = chan_info_read();
 		?>
 
 		<div class=post_form>
 			<?php
 			(new PostForm("/internal/actions/staff/chan_setup.php", "POST"))
-                ->add_text_field("Chan name", "name")
-                ->add_text_area("Welcome message", "welcome")
-                ->add_text_area("Rules", "rules")
+                ->add_text_field("Chan name", "name", $chan_info->chan_name)
+                ->add_text_area("Welcome message", "welcome", $chan_info->welcome)
+                ->add_text_area("Rules", "rules", $chan_info->rules)
 				->finalize();
 			?>
 		</div>
