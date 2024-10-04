@@ -1,5 +1,6 @@
 <?php
 include_once "../board.php";
+include_once "../chaninfo.php";
 
 if (!is_file(__DIR__ . "/../../first_run"))
 	die("The site has already been set up");
@@ -27,6 +28,15 @@ board_create($database, "def", "Default board");
 // if there are existing staff accounts in the db like when updating skip this step
 if (count($database->get_staff_accounts()) <= 0)
 	$database->write_staff_account("admin", hash("sha512", "admin"), "admin");
+
+if (!file_exists(__DIR__ . "../chaninfo.json"))
+{
+	$chan_info = new ChanInfo();
+	$chan_info->chan_name = "DeltaChan";
+	$chan_info->welcome = "Welcome to DeltaChan!";
+	$chan_info->rules = "Your rules go here.";
+	chan_info_write($chan_info);
+}
 
 unlink(__DIR__ . "/../../first_run");
 header("Location: /index.php");

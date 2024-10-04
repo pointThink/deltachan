@@ -34,7 +34,7 @@ class PostForm
 	{
 		$this->buffer .= "<tr>";
 		$this->buffer .= "<th>$label</th>";
-		$this->buffer .= "<td><textarea id=$id name=$name>$value</textarea>";
+		$this->buffer .= "<td><textarea id='$id' name='$name'>$value</textarea>";
 		$this->buffer .= "</tr>";
 
 		return $this;

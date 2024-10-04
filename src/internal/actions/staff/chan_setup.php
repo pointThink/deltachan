@@ -1,1 +1,54 @@
+<?php
+include_once "../../database.php";
+include_once "../../staff_session.php";
+include_once "../../ui.php";
+include_once "../../chaninfo.php";
+
+if (!staff_session_is_valid() || !staff_is_admin()) 
+	die("You are not allowed here");
+
+if (count($_POST) > 0)
+{
+    $chan_info = new ChanInfo();
+    $chan_info->chan_name = $_POST["name"];
+    $chan_info->rules = $_POST["rules"];
+    $chan_info->welcome = $_POST["welcome"];
+
+    chan_info_write($chan_info);
+
+	header("Location: /staff_dashboard.php");
+}
+?>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Editing imageboard info</title>
+		<?php include "../../link_css.php" ?>
+	</head>
+
+	<body>
+		<?php include "../../../topbar.php" ?>
+
+		<h1 class="title">Setup imageboard</h1>
+		<?php
+			$database = new Database();
+			$user = $database->read_staff_account($_GET["username"]);
+		?>
+
+		<div class=post_form>
+			<?php
+			(new PostForm("/internal/actions/staff/chan_setup.php", "POST"))
+                ->add_text_field("Chan name", "name")
+                ->add_text_area("Welcome message", "welcome")
+                ->add_text_area("Rules", "rules")
+				->finalize();
+			?>
+		</div>
+
+		<br>
+
+		<?php include "../../../footer.php" ?>
+	</body>
+</html>
 

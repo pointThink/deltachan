@@ -47,7 +47,7 @@
 				{
 					echo "<h4>Admin actions</h4>
 					<ul>
-						<li><a href=/internal/actions/staff/chan_setup.php>(TODO) Setup imageboard</a></li>
+						<li><a href=/internal/actions/staff/chan_setup.php>Setup imageboard</a></li>
 						<li><a href=/internal/staff_forms/manage_accounts.php>Manage staff accounts</a></li>
 						<li><a href=/internal/staff_forms/manage_boards.php>Manage boards</a></li>
 					</ul>";
