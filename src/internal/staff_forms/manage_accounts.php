@@ -44,7 +44,7 @@ if (!staff_session_is_valid())
 			?>
 		</table>
 
-		<a class=manage_link href=/internal/actions/staff/add_user.php>Add user (TODO)</a>
+		<a class=manage_link href=/internal/actions/staff/add_user.php>Add user</a>
 
 		<?php include "../../footer.php" ?>
 	</body>

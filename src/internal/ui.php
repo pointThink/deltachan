@@ -56,6 +56,25 @@ class PostForm
 		return $this;
 	}
 
+	public function add_dropdown($label, $name, $values, $selected="")
+	{
+		$this->buffer .= "<tr>";
+		$this->buffer .= "<th>$label</th>";
+		$this->buffer .= "<td><select name=$name>";
+		
+		foreach ($values as $value)
+		{
+			if ($value == $selected)
+				$this->buffer .= "<option value=$value selected>$value</option>";
+			else
+				$this->buffer .= "<option value=$value>$value</option>";
+		}
+
+		$this->buffer .= "</select></td></tr>";
+
+		return $this;
+	}
+
 	public function finalize()
 	{
 		$this->buffer .= "</table>";
