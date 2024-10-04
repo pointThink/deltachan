@@ -13,8 +13,14 @@
 
 <html>
 	<head>
-		<title>Index</title>
-		<?php include "internal/link_css.php"; ?>
+		<?php
+		include "internal/chaninfo.php"; 
+	
+		$chan_info = chan_info_read();
+		echo "<title>$chan_info->chan_name</title>";
+
+		include "internal/link_css.php";
+		?>
 	</head>
 
 	<body>
@@ -22,7 +28,9 @@
 			include "topbar.php";
 		?>
 
-		<br>
+		<?php
+			echo "<h1 class=title>$chan_info->chan_name</h1>";
+		?>
 
 		<div class=list>
 			<h3 class=list_title>Boards</h3>
