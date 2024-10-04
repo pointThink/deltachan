@@ -63,3 +63,8 @@ function staff_get_current_user()
 	$database = new Database();
 	return $database->read_staff_account($_SESSION["staff_username"]);
 }
+
+function staff_is_admin()
+{
+	return staff_get_current_user()->role == "admin";
+}

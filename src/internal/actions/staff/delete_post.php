@@ -5,7 +5,7 @@ include_once "../../staff_session.php";
 $board = $_POST["board"];
 $id = $_POST["id"];
 
-if (!staff_session_is_valid())
+if (!staff_session_is_valid()) 
 	die("You're not allowed to do that!");
 
 $database = new Database();

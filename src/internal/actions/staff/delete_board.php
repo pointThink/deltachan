@@ -3,7 +3,7 @@ include_once "../../database.php";
 include_once "../../staff_session.php";
 include_once "../../ui.php";
 
-if (!staff_session_is_valid())
+if (!staff_session_is_valid() || !staff_is_admin()) 
 	die("You are not allowed here");
 
 if (count($_POST) > 0)
