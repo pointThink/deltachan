@@ -46,6 +46,21 @@ function ban_read($ip)
     return $ban;
 }
 
+function ban_list_banned_ips()
+{
+    $database = new Database();
+    $result = $database->query("
+        select ip from bans;
+    ");
+
+    $ips = array();
+
+    while ($ban_array = $result->fetch_assoc())
+        array_push($ips, $ban_array["ip"]);
+
+    return $ips;
+}
+
 // duration in seconds
 // durration = 0 means ban is permanent
 function create_ban($ip, $reason, $duration)

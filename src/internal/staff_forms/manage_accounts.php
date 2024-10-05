@@ -9,7 +9,7 @@ if (!staff_session_is_valid() || !staff_is_admin())
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Manage boards</title>
+		<title>Manage accounts</title>
 		<?php include "../link_css.php" ?>
 	</head>
 

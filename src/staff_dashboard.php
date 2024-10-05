@@ -60,7 +60,7 @@
 			<ul>
 				<li><a href=/internal/actions/staff/approve_posts.php>(TODO) View unnaproved posts</a></li>
 				<li><a href=/internal/actions/staff/view_reports.php>(TODO) View reported posts</a></li>
-				<li><a href=/internal/actions/staff/manage_bans.php>(TODO) Manage bans</a></li>
+				<li><a href=/internal/staff_forms/manage_bans.php>Manage bans</a></li>
 			</ul>
 		</div>
 
