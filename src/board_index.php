@@ -2,6 +2,7 @@
 include_once "internal/database.php";
 include_once "internal/ui.php";
 include_once "internal/staff_session.php";
+include_once "internal/bans.php";
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +11,7 @@ include_once "internal/staff_session.php";
 		<?php
 			$database = new Database();
 			$board = $database->get_board($board_id);
-			echo "<title>/$board->id/ - $board->title</title>";			
+			echo "<title>/$board->id/ - $board->title</title>";
 		
 			include "internal/link_css.php";
 		?>
