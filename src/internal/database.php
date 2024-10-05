@@ -8,19 +8,27 @@ class Database
 {
 	public $mysql_connection;
 
-	public function __construct()
+	public function __construct($host = "", $user = "", $password = "")
 	{
 		global $deltachan_config;
-		$this->mysql_connection = new mysqli($deltachan_config["database_host"], $deltachan_config["database_user"], $deltachan_config["database_password"]);
+		$key = file_get_contents($deltachan_config["crypt_key_path"]);
 
-		if ($this->mysql_connection->connection_error)
-			die("Connection failed: $this->mysql_connection->connection_error");
-	}
+		if ($host == "" || $user == "" || $password == "")
+		{
+			// decrypt credentials
+			$host = openssl_decrypt($deltachan_config["database_host"], "aes-256-ecb", $key);
+			$user = openssl_decrypt($deltachan_config["database_user"], "aes-256-ecb", $key);
+			$password = openssl_decrypt($deltachan_config["database_password"], "aes-256-ecb", $key);
+		}
 
-	public function manual_login($host, $user, $password)
-	{
-		if ($this->mysql_connection->connection_error)
-			die("Connection failed: $this->mysql_connection->connection_error");
+		try
+		{
+			$this->mysql_connection = new mysqli($host, $user, $password);
+		}
+		catch (Exception $e)
+		{
+			echo "DB connection error: $e";
+		}
 	}
 
 	public function setup_meta_info_database()

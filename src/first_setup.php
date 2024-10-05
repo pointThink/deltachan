@@ -22,6 +22,10 @@
 			<label>Password</label><input type=password name=database_password><br>
 			<br>
 
+			<h2>Secure storage</h2>
+			<p>Select a path to a file outside of your web root to store secrets.</p>
+			<label>Directory</label><input type=text name=crypt_key_path><br>
+
 			<h2>Accounts (<div class=important>Important!</div>)</h2>
 			<p>DeltaChan will create a default admin account with <b>username "admin" and password "admin"</b>.</p>
 			<?php echo "<p>You can log in at <b>" . $_SERVER["HTTP_HOST"] . "/staff_login.php</b></p>" ?>

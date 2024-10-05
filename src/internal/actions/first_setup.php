@@ -1,6 +1,21 @@
 <?php
-include_once "../board.php";
 include_once "../chaninfo.php";
+
+// generate crypt key
+$key = bin2hex(openssl_random_pseudo_bytes(16));
+
+// shove the key in the path decided by the user
+$key_file = fopen($_POST["crypt_key_path"], "w");
+fwrite($key_file, $key);
+
+$host = $_POST["database_host"];
+$user = $_POST["database_user"];
+$password = $_POST["database_password"];
+
+// encrypt our database credentials
+$_POST["database_host"] = openssl_encrypt($_POST["database_host"], "aes-256-ecb", $key);
+$_POST["database_user"] = openssl_encrypt($_POST["database_user"], "aes-256-ecb", $key);
+$_POST["database_password"] = openssl_encrypt($_POST["database_password"], "aes-256-ecb", $key);
 
 if (!is_file(__DIR__ . "/../../first_run"))
 	die("The site has already been set up");
@@ -20,10 +35,10 @@ fclose($config_file);
 
 include_once "../database.php";
 include_once "../staff_session.php";
+include_once "../board.php";
 
-$database = new Database();
+$database = new Database($host, $user, $password);
 $database->setup_meta_info_database();
-board_create($database, "def", "Default board");
 
 // if there are existing staff accounts in the db like when updating skip this step
 if (count(get_staff_accounts()) <= 0)
