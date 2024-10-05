@@ -2,6 +2,13 @@
 session_start();
 
 include_once "../database.php";
+include_once "../bans.php";
+
+if (is_user_banned())
+{
+	header("Location: /internal/error_pages/ban.php");
+	die();
+}
 
 $file_upload_dir = "uploads/";
 $target_file = "";

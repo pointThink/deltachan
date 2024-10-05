@@ -9,6 +9,24 @@ class Ban
     public $duration;
 }
 
+function is_user_banned()
+{
+    $ban_read = ban_read($_SERVER["REMOTE_ADDR"]);
+
+    if ($ban_read != null)
+    {
+        if (strtotime($ban_read->date) + $ban_read->duration < time())
+        {
+            ban_remove($_SERVER["REMOTE_ADDR"]);
+            return false;
+        }
+        
+        return true;
+    }
+    
+    return false;
+}
+
 function ban_read($ip)
 {
     $database = new Database();
@@ -40,5 +58,13 @@ function create_ban($ip, $reason, $duration)
         ) values (
             '$ip', '$reason', $duration
         );
+    ");
+}
+
+function ban_remove($ip)
+{
+    $database = new Database();
+    $database->query("
+        delete from bans where ip = '$ip';
     ");
 }

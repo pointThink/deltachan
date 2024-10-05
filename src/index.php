@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
-	include_once "internal/boars.php";
+	include_once "internal/board.php";
+	include_once "internal/bans.php";
 
 	if (is_file("first_run"))
 	{
