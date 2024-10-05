@@ -4,8 +4,8 @@ DeltaChan is a lightweight imageboard software written in PHP.
 
 ## Install
 ### Requirements
-1. A webserver supporting PHP
-2. A MySQL database
+1. A webserver supporting PHP (Apache HTTPD or nginx will do)
+2. MySQL
 
 ### Step by step guide
 1. Run the make.sh script.
