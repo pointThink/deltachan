@@ -14,20 +14,8 @@ body {
 }
 
 #staff_dashboard_title h4,
-#staff_dashboard_title a,
-#staff_dashboard_content h4,
-#staff_dashboard_content ul,
-#staff_dashboard_content li,
-#staff_dashboard_content a {
+#staff_dashboard_title a {
   margin: 0;
-}
-
-#staff_dashboard_content {
-  padding: 1cm;
-  border: 1px solid black;
-  width: 16cm;
-  margin-left: auto;
-	margin-right: auto;
 }
 
 #reply_disclaimer {
@@ -250,5 +238,9 @@ form .clear_file, form .file_upload {
 	font-family: sans-serif;
 	margin: 0;
 	padding: 0;
+}
+
+.list_content ul {
+	margin: 0;
 }
 

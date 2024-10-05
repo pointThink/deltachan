@@ -30,38 +30,41 @@
 
 		<br>
 
-		<div id=staff_dashboard_content>
+		<div class=list>
 			<?php
 				$database = new Database();
 
-				echo "<h4>Boards</h4>";
-				echo "<ul>";
+				
+				echo "<h4 class=list_title>Boards</h4>";
+				echo "<div class=list_content><ul>";
 
 				foreach (board_list() as $b)
 					echo "<li><a href=/$b->id/>/$b->id/ - $b->title</a></li>";
 
-				echo "</ul><br>";
+				echo "</ul></div>";
 				
 
 				if ($current_user->role == "admin")
 				{
-					echo "<h4>Admin actions</h4>
-					<ul>
-						<li><a href=/internal/actions/staff/chan_setup.php>Setup imageboard</a></li>
-						<li><a href=/internal/staff_forms/manage_accounts.php>Manage staff accounts</a></li>
-						<li><a href=/internal/staff_forms/manage_boards.php>Manage boards</a></li>
-					</ul>";
+					echo "<h4 class=list_title>Admin actions</h4>
+					<div class=list_content>
+						<ul>
+							<li><a href=/internal/actions/staff/chan_setup.php>Setup imageboard</a></li>
+							<li><a href=/internal/staff_forms/manage_accounts.php>Manage staff accounts</a></li>
+							<li><a href=/internal/staff_forms/manage_boards.php>Manage boards</a></li>
+						</ul>
+					</div>";
 				}
 			?>
 
-			<br>
-
-			<h4>Moderator actions</h4>
-			<ul>
-				<li><a href=/internal/actions/staff/approve_posts.php>(TODO) View unnaproved posts</a></li>
-				<li><a href=/internal/actions/staff/view_reports.php>(TODO) View reported posts</a></li>
-				<li><a href=/internal/staff_forms/manage_bans.php>Manage bans</a></li>
-			</ul>
+			<h4 class=list_title>Moderator actions</h4>
+			<div class="list_content">
+				<ul>
+					<li><a href=/internal/actions/staff/approve_posts.php>(TODO) View unnaproved posts</a></li>
+					<li><a href=/internal/actions/staff/view_reports.php>(TODO) View reported posts</a></li>
+					<li><a href=/internal/staff_forms/manage_bans.php>Manage bans</a></li>
+				</ul>
+			</div>
 		</div>
 
 		<?php include "footer.php" ?>
