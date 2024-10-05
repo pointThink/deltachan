@@ -1,12 +1,12 @@
 body {
-	background: linear-gradient(180deg, #c9d4ff 0%, #ebefff 100%);
+	background: linear-gradient(180deg, #d1d5ed 0%, #eef2ff 6cm);
 	color: black;
 	background-attachment: fixed;
 }
 
 hr {
     border: none;
-    background-color: #7d95ff88;
+    background-color: #00000066;
     height: 1px;
 }
 
@@ -15,7 +15,12 @@ hr {
 }
 
 .reply {
-	background: #cfd8ff;
+	background: #d6daf0;
+}
+
+.post {
+    background-color: none;
+    margin: 0;
 }
 
 .reply {
@@ -25,13 +30,17 @@ hr {
   border-right: 1px solid rgba(0, 0, 0, 0.25);
 }
 
+#topbar {
+  border-bottom: none;
+}
+
 .post_form th {
-	background: #7d95ff;
+	background: #9988ee;
 	border: 1px solid black;
 }
 
 a:link, a:visited {
-  color: #1e274d;
+  color: #34345c;
 }
 
 #staff_dashboard_content {
@@ -47,7 +56,8 @@ a:link, a:visited {
 }
 
 .manage_table th {
-	background-color: #7d95ff;
+    border: 1px solid black;
+	background-color: #9988ee;
 }
 
 .manage_table td {
@@ -56,8 +66,9 @@ a:link, a:visited {
 
 .list {
 	background: white;
+    border: 1px solid black;
 }
 
 .list .list_title {
-	background-color: #7d95ff;
+	background-color: #9988ee;
 }

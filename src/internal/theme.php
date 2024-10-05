@@ -5,7 +5,7 @@ header("Content-type: text/css");
 if (!isset($_COOKIE["theme"]))
 {
     setcookie("theme", "deltachan.css", time() + 60*60*24*30, "/");
-    $css_file_name = "deltachan.css";
+    $css_file_name = "yotsuba-blue.css";
 }
 else
     $css_file_name = $_COOKIE["theme"];
