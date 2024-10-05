@@ -25,10 +25,6 @@ hr {
   border-right: 1px solid rgba(0, 0, 0, 0.25);
 }
 
-#topbar {
-  background: #7d95ff;
-}
-
 .post_form th {
 	background: #7d95ff;
 	border: 1px solid black;

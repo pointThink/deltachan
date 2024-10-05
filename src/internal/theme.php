@@ -2,7 +2,13 @@
 header("Content-type: text/css");
 
 // this will be loaded from cookies later
-$css_file_name = "yotsuba.css";
+if (!isset($_COOKIE["theme"]))
+{
+    setcookie("theme", "deltachan.css", time() + 60*60*24*30, "/");
+    $css_file_name = "deltachan.css";
+}
+else
+    $css_file_name = $_COOKIE["theme"];
 
 $base_style_file = fopen(__DIR__ . "/base_style.css", "r");
 $base_style = fread($base_style_file, filesize(__DIR__ . "/base_style.css")) . "\n";

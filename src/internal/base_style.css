@@ -152,9 +152,14 @@ form .clear_file, form .file_upload {
 	margin-right: 0.2cm;
 }
 
-#topbar {
-	padding: 0;
-	border-bottom: 1px solid black;
+.post .post_attachment_expanded {
+	display: none;
+}
+
+#topbar #theme_selector_section {
+	box-sizing: border-box;
+	height: 100%;
+	float: right;
 }
 
 #topbar a, #topbar p {
@@ -247,3 +252,4 @@ form .clear_file, form .file_upload {
 	margin: 0;
 	padding: 0;
 }
+

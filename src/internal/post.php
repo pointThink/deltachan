@@ -90,10 +90,7 @@ class Post
 
 		if ($this->image_file != "")
 		{
-			if (is_file(__DIR__ . "/../" . $thumb_file_name))
-				echo "<a href=/$this->image_file><img class=post_attachment src='/$thumb_file_name'></a>";
-			else
-				echo "<a href=/$this->image_file><img class=post_attachment src='/$this->image_file'></a>";
+			echo "<a href=/$this->image_file><img class=post_attachment src='/$thumb_file_name'></a>";
 		}
 
 		echo "<a class=post_id href=/$this->board/post.php?id=$this->id>>>$this->id | $this->creation_time</a>";
