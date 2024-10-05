@@ -11,18 +11,18 @@ class Database
 	public function __construct()
 	{
 		global $deltachan_config;
-		$this->$mysql_connection = new mysqli($deltachan_config["database_host"], $deltachan_config["database_user"], $deltachan_config["database_password"]);
+		$this->mysql_connection = new mysqli($deltachan_config["database_host"], $deltachan_config["database_user"], $deltachan_config["database_password"]);
 
-		if ($this->$mysql_connection->connection_error)
-			die("Connection failed: $this->$mysql_connection->connection_error");
+		if ($this->mysql_connection->connection_error)
+			die("Connection failed: $this->mysql_connection->connection_error");
 	}
 
 	public function manual_login($host, $user, $password)
 	{
-		$this->$mysql_connection = new mysqli($host, $user, $password);
+		$this->mysql_connection = new mysqli($host, $user, $password);
 
-		if ($this->$mysql_connection->connection_error)
-			die("Connection failed: $this->$mysql_connection->connection_error");
+		if ($this->mysql_connection->connection_error)
+			die("Connection failed: $this->mysql_connection->connection_error");
 	}
 
 	// Sets up a database with necesary tables for a board 
@@ -59,7 +59,7 @@ class Database
 	{
 		$this->query("create database if not exists deltachan;");
 		
-		$this->$mysql_connection->select_db("deltachan");
+		$this->mysql_connection->select_db("deltachan");
 
 		$this->query("
 			create table if not exists board_info (
@@ -81,7 +81,7 @@ class Database
 
 	public function add_board_info_row($id, $title, $subtitle)
 	{
-		$this->$mysql_connection->select_db("deltachan");
+		$this->mysql_connection->select_db("deltachan");
 
 		$result = $this->query("
 			select * from board_info where id = '$id';
@@ -101,7 +101,7 @@ class Database
 
 	public function edit_board_info($id, $title, $subtitle)
 	{
-		$this->$mysql_connection->select_db("deltachan");
+		$this->mysql_connection->select_db("deltachan");
 		$this->query("
 			update board_info
 			set title = '$title', subtitle = '$subtitle'
@@ -112,7 +112,7 @@ class Database
 	// Fetches all the boards on the chan
 	public function get_boards()
 	{
-		$this->$mysql_connection->select_db("deltachan");
+		$this->mysql_connection->select_db("deltachan");
 		$query_result = $this->query("select * from board_info;");
 		$boards = array();
 
@@ -130,7 +130,7 @@ class Database
 
 	public function get_board($board_id)
 	{
-		$this->$mysql_connection->select_db("deltachan");
+		$this->mysql_connection->select_db("deltachan");
 		$query_result = $this->query("select * from board_info where id = '$board_id';");
 		$board_array = $query_result->fetch_array();
 		$board = new Board();
@@ -152,7 +152,7 @@ class Database
 	public function remove_board($board_id)
 	{
 		echo $board_id;
-		$this->$mysql_connection->select_db("deltachan");
+		$this->mysql_connection->select_db("deltachan");
 		
 		$this->query("
 			drop table posts_$board_id;
@@ -168,7 +168,7 @@ class Database
 	// Does not upload any attachments!
 	public function write_post($board_id, $is_reply, $replies_to, $title, $body, $poster_ip, $poster_country, $is_staff_post, $staff_username)
 	{
-		$this->$mysql_connection->select_db("deltachan");
+		$this->mysql_connection->select_db("deltachan");
 
 		if (!$is_reply) $replies_to = 0;
 		if (!$is_staff_post) $staff_username = "";
@@ -176,8 +176,8 @@ class Database
 		$is_reply = intval($is_reply);
 
 		// prevent sql injection
-		$title = $this->$mysql_connection->real_escape_string($title);
-		$body = $this->$mysql_connection->real_escape_string($body);	
+		$title = $this->mysql_connection->real_escape_string($title);
+		$body = $this->mysql_connection->real_escape_string($body);	
 
 		$query = "insert into posts_$board_id(
 			is_reply, replies_to, title, post_body, poster_ip, poster_country, is_staff_post, staff_username, approved
@@ -188,12 +188,12 @@ class Database
 		$query_result = $this->query($query);
 
 		// return the newly created post
-		return $this->read_post($board_id, $this->$mysqli_connection->insert_id);
+		return $this->read_post($board_id, $this->mysql_connection->insert_id);
 	}
 
 	public function bump_post($board, $id)
 	{
-		$this->$mysql_connection->select_db("deltachan");	
+		$this->mysql_connection->select_db("deltachan");	
 		$this->query("
 			update posts_$board
 			set bump_time = current_timestamp
@@ -203,8 +203,8 @@ class Database
 
 	public function update_post_file($board, $id, $file)
 	{
-		$this->$mysql_connection->select_db("deltachan");
-		$file = $this->$mysqli_connection->real_escape_string($file);
+		$this->mysql_connection->select_db("deltachan");
+		$file = $this->mysql_connection->real_escape_string($file);
 
 		$this->query("
 			update posts_$board
@@ -218,7 +218,7 @@ class Database
 	{
 		$post = new Post();
 
-		$this->$mysql_connection->select_db("deltachan");
+		$this->mysql_connection->select_db("deltachan");
 		$query_result = $this->query("select * from posts_$board where id = $id;");
 
 		if ($query_result->num_rows <= 0)
@@ -252,7 +252,7 @@ class Database
 
 	public function remove_post($board, $id)
 	{
-		$this->$mysqli_connection->select_db("deltachan");
+		$this->mysql_connection->select_db("deltachan");
 
 		$this->query("
 			delete from posts_$board where id = $id;
@@ -262,7 +262,7 @@ class Database
 	public function get_post_replies($board, $post)
 	{
 		$replies = array();
-		$this->$mysql_connection->select_db("deltachan");
+		$this->mysql_connection->select_db("deltachan");
 		$id_str = strval($post);
 
 		$result = $this->query("
@@ -277,7 +277,7 @@ class Database
 
 	public function write_staff_account($username, $password_hash, $role, $contact_email = "")
 	{
-		$this->$mysql_connection->select_db("deltachan");
+		$this->mysql_connection->select_db("deltachan");
 
 		$this->query("
 			insert into staff_accounts (
@@ -290,7 +290,7 @@ class Database
 
 	public function update_staff_account($old_username, $username, $role, $contact_email = "")
 	{
-		$this->$mysql_connection->select_db("deltachan");
+		$this->mysql_connection->select_db("deltachan");
 		$this->query("
 			update staff_accounts
 			set username = '$username', role = '$role', contact_email = '$contact_email'
@@ -300,7 +300,7 @@ class Database
 
 	public function update_staff_account_password($username, $password_hash)
 	{
-		$this->$mysql_connection->select_db("deltachan");
+		$this->mysql_connection->select_db("deltachan");
 		$this->query("
 			update staff_accounts
 			set password_hash = '$password_hash'
@@ -310,7 +310,7 @@ class Database
 
 	public function delete_staff_account($username)
 	{
-		$this->$mysql_connection->select_db("deltachan");
+		$this->mysql_connection->select_db("deltachan");
 		$this->query("
 			delete from staff_accounts where username = '$username';
 		");
@@ -318,10 +318,10 @@ class Database
 
 	public function read_staff_account($username)
 	{
-		$this->$mysql_connection->select_db("deltachan");
+		$this->mysql_connection->select_db("deltachan");
 
 		$account_info = new StaffAccountInfo();
-		$username = $this->$mysqli_connection->real_escape_string($username);
+		$username = $this->mysql_connection->real_escape_string($username);
 
 		$result = $this->query("
 			select * from staff_accounts where username='$username'
@@ -343,7 +343,7 @@ class Database
 
 	public function get_staff_accounts()
 	{
-		$this->$mysql_connection->select_db("deltachan");
+		$this->mysql_connection->select_db("deltachan");
 
 		$result = $this->query("
 			select username from staff_accounts;
@@ -359,6 +359,6 @@ class Database
 
 	private function query($str)
 	{
-		return $this->$mysql_connection->query($str);
+		return $this->mysql_connection->query($str);
 	}
 }
