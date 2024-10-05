@@ -8,8 +8,7 @@ if (!staff_session_is_valid() || !staff_is_admin())
 
 if (count($_POST) > 0)
 {
-	$database = new Database();
-	$database->write_staff_account(
+	write_staff_account(
 		$_POST["username"],
 		hash("sha512", $_POST["password"]),
 		$_POST["role"],

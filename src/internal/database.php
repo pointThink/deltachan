@@ -6,7 +6,7 @@ include_once __DIR__ . "/config.php";
 
 class Database
 {
-	private $mysql_connection;
+	public $mysql_connection;
 
 	public function __construct()
 	{
@@ -260,79 +260,6 @@ class Database
 			array_push($replies, $this->read_post($board, $reply["id"]));
 
 		return $replies;
-	}
-
-	public function write_staff_account($username, $password_hash, $role, $contact_email = "")
-	{
-		$this->query("
-			insert into staff_accounts (
-				username, password_hash, role, contact_email
-			) values (
-				'$username', '$password_hash', '$role', '$contact_email'
-			);
-		");
-	}
-
-	public function update_staff_account($old_username, $username, $role, $contact_email = "")
-	{
-		$this->query("
-			update staff_accounts
-			set username = '$username', role = '$role', contact_email = '$contact_email'
-			where username = '$old_username';
-		");
-	}
-
-	public function update_staff_account_password($username, $password_hash)
-	{
-		$this->query("
-			update staff_accounts
-			set password_hash = '$password_hash'
-			where username = '$username';
-		");
-	}
-
-	public function delete_staff_account($username)
-	{
-		$this->query("
-			delete from staff_accounts where username = '$username';
-		");
-	}
-
-	public function read_staff_account($username)
-	{
-		$account_info = new StaffAccountInfo();
-		$username = $this->mysql_connection->real_escape_string($username);
-
-		$result = $this->query("
-			select * from staff_accounts where username='$username'
-		");
-
-		
-		if ($result->num_rows <= 0)
-			return NULL;
-
-		$account_array = $result->fetch_array();
-
-		$account_info->username = $username;
-		$account_info->password_hash = $account_array["password_hash"];
-		$account_info->role = $account_array["role"];
-		$account_info->contact_email = $account_array["contact_email"];
-
-		return $account_info;
-	}
-
-	public function get_staff_accounts()
-	{
-		$result = $this->query("
-			select username from staff_accounts;
-		");
-
-		$accounts = array();
-
-		while ($account = $result->fetch_assoc())
-			array_push($accounts, $this->read_staff_account($account["username"]));
-
-		return $accounts;
 	}
 
 	public function query($str)

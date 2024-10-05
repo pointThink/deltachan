@@ -168,3 +168,4 @@ class Post
 		echo "</div>";
 	}
 }
+

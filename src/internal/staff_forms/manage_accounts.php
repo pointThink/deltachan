@@ -27,8 +27,7 @@ if (!staff_session_is_valid() || !staff_is_admin())
 			</tr>
 
 			<?php
-				$database = new Database();
-				$accounts = $database->get_staff_accounts();
+				$accounts = get_staff_accounts();
 
 				foreach ($accounts as $account)
 				{

@@ -9,7 +9,7 @@ if (!staff_session_is_valid() || !staff_is_admin())
 if (count($_POST) > 0)
 {
 	$database = new Database();
-	$database->delete_staff_account($_POST["username"]);
+	delete_staff_account($_POST["username"]);
 	header("Location: /internal/staff_forms/manage_accounts.php");
 	die();
 }

@@ -11,7 +11,7 @@ if (count($_POST) > 0)
 	echo var_dump($_POST);
 	$database = new Database();
 
-    $database->update_staff_account(
+    update_staff_account(
         $_POST["old_username"],
         $_POST["username"],
         $_POST["role"],
@@ -19,7 +19,7 @@ if (count($_POST) > 0)
     );
 
     if (isset($_POST["password"]) && $_POST["password"] != "")
-        $database->update_staff_account_password($_POST["username"], hash("sha512", $_POST["password"]));
+        update_staff_account_password($_POST["username"], hash("sha512", $_POST["password"]));
 
 	header("Location: /internal/staff_forms/manage_accounts.php");
 }
@@ -38,7 +38,7 @@ if (count($_POST) > 0)
 		<h1 class="title">Edit account</h1>
 		<?php
 			$database = new Database();
-			$user = $database->read_staff_account($_GET["username"]);
+			$user = read_staff_account($_GET["username"]);
 		?>
 
 		<div class=post_form>
