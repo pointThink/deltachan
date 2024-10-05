@@ -103,10 +103,16 @@ class Post
 				echo "<p class=your_post>(You)</p>";
 
 		if ($mod_mode)
+		{
 			(new ActionLink("/internal/actions/staff/delete_post.php", "delete_$this->id", "Delete"))
 				->add_data("board", $this->board)
 				->add_data("id", $this->id)
 				->finalize();
+
+			(new ActionLink("/internal/actions/staff/ban.php", "ban_$this->id", "Ban", "GET"))
+				->add_data("ip", $this->poster_ip)
+				->finalize();
+		}
 
 		echo "<h4>$this->title</h4>";
 		$this->format_and_show_text($this->body);

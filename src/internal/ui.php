@@ -20,6 +20,31 @@ class PostForm
 		return $this;
 	}
 
+	public function add_checkbox($label, $name, $selected = false)
+	{
+		$this->buffer .= "<tr>";
+		$this->buffer .= "<th>$label</th>";
+
+		if ($selected)
+			$this->buffer .= "<td><input type=checkbox name=$name checked></td>";
+		else
+			$this->buffer .= "<td><input type=checkbox name=$name></td>";
+
+		$this->buffer .= "</tr>";
+
+		return $this;
+	}
+
+	public function add_number($label, $name, $value = "")
+	{
+		$this->buffer .= "<tr>";
+		$this->buffer .= "<th>$label</th>";
+		$this->buffer .= "<td><input type=number name=$name value='$value'></td>";
+		$this->buffer .= "</tr>";
+
+		return $this;
+	}
+
 	public function add_password_field($label, $name, $value = "")
 	{
 		$this->buffer .= "<tr>";

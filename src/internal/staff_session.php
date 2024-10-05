@@ -75,6 +75,12 @@ function staff_is_admin()
 	return staff_get_current_user()->role == "admin";
 }
 
+function staff_is_moderator()
+{
+	$user = staff_get_current_user();
+	return $user->role == "admin" || $user->role == "mod";
+}
+
 function write_staff_account($username, $password_hash, $role, $contact_email = "")
 {
 	$database = new Database();
