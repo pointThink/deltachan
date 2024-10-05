@@ -218,16 +218,28 @@ form .clear_file, form .file_upload {
 .list {
 	border: 1px solid black;
 
-	width: 16cm;
+	width: 25cm;
 	font-size: 14px;
 	margin: auto;
 }
 
 .list .list_title {
 	margin: 0px;
-	padding: 0.1cm;
+	padding: 0.2cm;
 }
 
 .list .list_content {
-	padding: 0.1cm;
+	padding: 0.2cm;
+	margin: 0;
+}
+
+.list_content p,
+.list_content h1,
+.list_content h2,
+.list_content h3,
+.list_content h4,
+.list_content h5,
+.list_content h6 {
+	margin: 0;
+	padding: 0;
 }
