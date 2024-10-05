@@ -23,33 +23,6 @@ class Database
 			die("Connection failed: $this->mysql_connection->connection_error");
 	}
 
-	// Sets up a database with necesary tables for a board 
-	public function setup_board_database($board_id)
-	{
-		$this->query("
-			create table if not exists posts_$board_id (
-				id int not null auto_increment primary key,
-				is_reply int not null,
-				replies_to int,
-
-				creation_time datetime not null default current_timestamp,
-				bump_time datetime not null default current_timestamp,
-
-				title varchar(255),
-				post_body text,
-				image_file_name varchar(255),
-
-				poster_ip varchar(255) not null,
-				poster_country varchar(2),
-
-				is_staff_post int not null,
-				staff_username varchar(255),
-
-				approved int not null default 0
-			);
-		");
-	}
-
 	public function setup_meta_info_database()
 	{
 		$this->query("create database if not exists deltachan;");
@@ -79,83 +52,6 @@ class Database
 				duration int not null default 0
 			);
 		");
-	}
-
-	public function add_board_info_row($id, $title, $subtitle)
-	{
-		$result = $this->query("
-			select * from board_info where id = '$id';
-		");
-
-		if ($result->num_rows > 0)
-			return;
-
-		$this->query("
-			insert into board_info (
-				id, title, subtitle
-			) values (
-				'$id', '$title', '$subtitle'
-			);
-		");
-	}
-
-	public function edit_board_info($id, $title, $subtitle)
-	{
-		$this->query("
-			update board_info
-			set title = '$title', subtitle = '$subtitle'
-			where id = '$id';
-		");
-	}
-
-	// Fetches all the boards on the chan
-	public function get_boards()
-	{
-		$query_result = $this->query("select * from board_info;");
-		$boards = array();
-
-		while ($board_array = $query_result->fetch_assoc())
-		{
-			$board = new Board();
-			$board->id = $board_array["id"];
-			$board->title = $board_array["title"];
-			$board->subtitle = $board_array["subtitle"];
-			array_push($boards, $board);
-		}
-
-		return $boards;
-	}
-
-	public function get_board($board_id)
-	{
-		$query_result = $this->query("select * from board_info where id = '$board_id';");
-		$board_array = $query_result->fetch_array();
-		$board = new Board();
-
-		$board->id = $board_array["id"];
-		$board->title = $board_array["title"];
-		$board->subtitle = $board_array["subtitle"];
-
-		$query_result = $this->query("select id from posts_$board_id where is_reply = 0;");
-		
-		while ($post_id = $query_result->fetch_assoc())
-		{
-			array_push($board->posts, $this->read_post($board_id, $post_id["id"]));
-		}
-
-		return $board;
-	}
-
-	public function remove_board($board_id)
-	{	
-		$this->query("
-			drop table posts_$board_id;
-		");
-		
-		$this->query("
-			delete from board_info where id = '$board_id';
-		");
-
 	}
 
 	// Adds a post entry to the posts table

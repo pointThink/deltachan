@@ -1,5 +1,5 @@
 <?php
-include_once "internal/database.php";
+include_once "internal/board.php";
 include_once "internal/ui.php";
 include_once "internal/staff_session.php";
 include_once "internal/bans.php";
@@ -10,7 +10,7 @@ include_once "internal/bans.php";
 	<head>
 		<?php
 			$database = new Database();
-			$board = $database->get_board($board_id);
+			$board = board_get($board_id);
 			echo "<title>/$board->id/ - $board->title</title>";
 		
 			include "internal/link_css.php";

@@ -1,5 +1,5 @@
 <?php
-include_once "../../database.php";
+include_once "../../board.php";
 include_once "../../staff_session.php";
 include_once "../../ui.php";
 
@@ -8,9 +8,7 @@ if (!staff_session_is_valid() || !staff_is_admin())
 
 if (count($_POST) > 0)
 {
-	echo var_dump($_POST);
-	$database = new Database();
-	$database->edit_board_info($_POST["id"], $_POST["title"], $_POST["subtitle"]);
+	board_edit_info($_POST["id"], $_POST["title"], $_POST["subtitle"]);
 	header("Location: /internal/staff_forms/manage_boards.php");
 }
 ?>
@@ -27,8 +25,7 @@ if (count($_POST) > 0)
 
 		<h1 class="title">Editing board</h1>
 		<?php
-			$database = new Database();
-			$board = $database->get_board($_GET["id"]);
+			$board = board_get($_GET["id"]);
 		?>
 
 		<div class=post_form>

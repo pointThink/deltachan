@@ -27,10 +27,10 @@ if (count($_POST) > 0)
 			delete_post($reply->id);
 	}
 
-	foreach ($database->get_board($board)->posts as $post)
+	foreach (board_get($board)->posts as $post)
 		delete_post($post->id);
 
-	$database->remove_board($board);
+	board_remove($board);
 
 	unlink(__DIR__ . "/../../../$board/post.php");
 	unlink(__DIR__ . "/../../../$board/index.php");

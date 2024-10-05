@@ -1,5 +1,6 @@
 <?php
 include_once "internal/database.php";
+include_once "internal/board.php";
 include_once "internal/ui.php";
 
 $database = new Database();
@@ -11,7 +12,7 @@ $post = $database->read_post($board_id, $_GET["id"]);
 	<head>
 		<?php
 			$database = new Database();
-			$board = $database->get_board($board_id);
+			$board = board_get($board_id);
 			echo "<title>/$board->id/ - $post->title</title>";
 			
 			include "internal/link_css.php";

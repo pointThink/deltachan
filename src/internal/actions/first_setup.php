@@ -19,15 +19,15 @@ fwrite($config_file, $config_template);
 fclose($config_file);
 
 include_once "../database.php";
+include_once "../staff_session.php";
 
 $database = new Database();
-$database->manual_login($_POST["database_host"], $_POST["database_user"], $_POST["database_password"]);
 $database->setup_meta_info_database();
 board_create($database, "def", "Default board");
 
 // if there are existing staff accounts in the db like when updating skip this step
-if (count($database->get_staff_accounts()) <= 0)
-	$database->write_staff_account("admin", hash("sha512", "admin"), "admin");
+if (count(get_staff_accounts()) <= 0)
+	write_staff_account("admin", hash("sha512", "admin"), "admin");
 
 if (!file_exists(__DIR__ . "../chaninfo.json"))
 {

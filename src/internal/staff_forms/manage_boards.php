@@ -1,5 +1,5 @@
 <?php
-include_once "../database.php";
+include_once "../board.php";
 include_once "../staff_session.php";
 
 if (!staff_session_is_valid() || !staff_is_admin()) 
@@ -27,8 +27,7 @@ if (!staff_session_is_valid() || !staff_is_admin())
 			</tr>
 
 			<?php
-				$database = new Database();
-				$boards = $database->get_boards();
+				$boards = board_list();
 
 				foreach ($boards as $board)
 				{

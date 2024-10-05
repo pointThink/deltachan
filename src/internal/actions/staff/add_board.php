@@ -2,7 +2,6 @@
 include_once "../../board.php";
 include_once "../../ui.php";
 include_once "../../staff_session.php";
-include_once "../../database.php";
 
 if (!staff_session_is_valid() || !staff_is_admin()) 
 	die("You are not allowed in here");
@@ -10,7 +9,7 @@ if (!staff_session_is_valid() || !staff_is_admin())
 if (count($_POST) > 0)
 {
 	echo var_dump($_POST);
-	board_create(new Database(), $_POST["id"], $_POST["title"], $_POST["subtitle"]);
+	board_create($_POST["id"], $_POST["title"], $_POST["subtitle"]);
 	header("Location: /" . $_POST["id"] . "/");
 	die();
 }

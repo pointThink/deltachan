@@ -1,6 +1,6 @@
 <?php
 	include_once "internal/staff_session.php";
-	include_once "internal/database.php";
+	include_once "internal/board.php";
 
 	if (!staff_session_is_valid())
 	{
@@ -37,7 +37,7 @@
 				echo "<h4>Boards</h4>";
 				echo "<ul>";
 
-				foreach ($database->get_boards() as $b)
+				foreach (board_list() as $b)
 					echo "<li><a href=/$b->id/>/$b->id/ - $b->title</a></li>";
 
 				echo "</ul><br>";

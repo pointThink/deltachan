@@ -6,10 +6,9 @@
 
 	<p>[</p>
 	<?php
-		include_once "internal/database.php";
-	
-		$db = new Database();
-		$boards = $db->get_boards();
+		include_once "internal/board.php";
+
+		$boards = board_list();
 
 		foreach ($boards as $b)
 		{

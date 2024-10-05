@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <?php
-	include_once "internal/database.php";
+	include_once "internal/boars.php";
 
 	if (is_file("first_run"))
 	{
 		header("Location: /first_setup.php");
 		die();
 	}
-
-	$database = new Database();
 ?>
 
 <html>
@@ -36,7 +34,7 @@
 			<h3 class=list_title>Boards</h3>
 			<div class=list_content>
 			<?php
-				$boards = $database->get_boards();
+				$boards = board_list();
 
 				foreach ($boards as $board)
 				{
