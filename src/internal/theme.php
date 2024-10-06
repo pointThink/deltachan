@@ -4,7 +4,7 @@ header("Content-type: text/css");
 // this will be loaded from cookies later
 if (!isset($_COOKIE["theme"]))
 {
-    setcookie("theme", "deltachan.css", time() + 60*60*24*30, "/");
+    setcookie("theme", "yotsuba-blue.css", time() + 60*60*24*30, "/");
     $css_file_name = "yotsuba-blue.css";
 }
 else

@@ -3,7 +3,7 @@ function selectThemeFromPicker() {
 }
 
 function setTheme(themeName) {
-    document.cookie = "theme=" + themeName + "; path=/; SameSite=None";
+    document.cookie = "theme=" + themeName + "; path=/; SameSite=Strict";
 
     location.reload();
 }
