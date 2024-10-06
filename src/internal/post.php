@@ -25,6 +25,23 @@ class Post
 
 	public $replies = array();
 
+	public function display_attachment()
+	{
+		$mime_type = mime_content_type(__DIR__ . "/../$this->image_file");
+		$base_name = basename($this->image_file);
+
+		if (str_starts_with($mime_type, "video"))
+			echo "<video class=post_attachment controls preload=metadata src='/$this->image_file'></video>";
+		else if (str_starts_with($mime_type, "image"))
+		{
+			$file_parts = explode(".", $this->image_file);
+			$thumb_file_name = $file_parts[0] . "-thumb.jpg";
+			echo "<a href=/$this->image_file><img class=post_attachment src='/$thumb_file_name'></a>";
+		}
+		else
+			echo "<a class=post_attachment_non_image href='/$this->image_file'><img class=post_attachment_non_image alt='attachment' src='/attachment.svg'>$base_name</a>";
+	}
+
 	public function format_and_show_text($text)
 	{
 		$text = htmlspecialchars($text);
@@ -85,13 +102,8 @@ class Post
 	{
 		echo "<div class=post id=post_$this->id>";
 
-		$file_parts = explode(".", $this->image_file);
-		$thumb_file_name = $file_parts[0] . "-thumb.jpg";
-
 		if ($this->image_file != "")
-		{
-			echo "<a href=/$this->image_file><img class=post_attachment src='/$thumb_file_name'></a>";
-		}
+			$this->display_attachment();
 
 		echo "<a class=post_id href=/$this->board/post.php?id=$this->id>>>$this->id | $this->creation_time</a>";
 
@@ -133,12 +145,7 @@ class Post
 		$thumb_file_name = $file_parts[0] . "-thumb.jpg";
 
 		if ($this->image_file != "")
-		{
-			if (is_file(__DIR__ . "/../" . $thumb_file_name))
-				echo "<a href=/$this->image_file><img class=post_attachment src='/$thumb_file_name'></a>";
-			else
-				echo "<a href=/$this->image_file><img class=post_attachment src='/$this->image_file'></a>";
-		}
+			$this->display_attachment();	
 
 		echo "<p class=post_id>>>$this->id | $this->creation_time</p>";
 

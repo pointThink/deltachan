@@ -23,25 +23,28 @@ $result = $database->write_post(
 if (!is_dir(__DIR__ . "/../../" . $file_upload_dir))
 	mkdir(__DIR__ . "/../../" . $file_upload_dir);
 
-if ($_FILES["file"]["size"] > 0)
+if ($_FILES["file"]["size"] > 0) 
 {	
 	$target_file = $file_upload_dir . "$result->board-" . strval($result->id) . "." . pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
 	move_uploaded_file($_FILES["file"]["tmp_name"], __DIR__ . "/../../" . $target_file);
 	$database->update_post_file($result->board, $result->id, $target_file);
 
-	// create image thumbnail
-	$image_data = file_get_contents(__DIR__ . "/../../" . $target_file);
-	$image = imagecreatefromstring($image_data);
-	
-	$width = imagesx($image);
-	$height = imagesy($image);
+	if (str_starts_with(mime_content_type($_FILES["file"]["tmp_name"]), "image"))
+	{
+		// create image thumbnail
+		$image_data = file_get_contents(__DIR__ . "/../../" . $target_file);
+		$image = imagecreatefromstring($image_data);
+			
+		$width = imagesx($image);
+		$height = imagesy($image);
 
-	$desired_width = 200;
-	$desired_height = floor($height * ($desired_width / $width));
+		$desired_width = 200;
+		$desired_height = floor($height * ($desired_width / $width));
 
-	$virtual_image = imagecreatetruecolor($desired_width, $desired_height);
-	imagecopyresampled($virtual_image, $image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
-	imagejpeg($virtual_image, __DIR__ . "/../../" . $file_upload_dir . "$result->board-$result->id-thumb.jpg");
+		$virtual_image = imagecreatetruecolor($desired_width, $desired_height);
+		imagecopyresampled($virtual_image, $image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
+		imagejpeg($virtual_image, __DIR__ . "/../../" . $file_upload_dir . "$result->board-$result->id-thumb.jpg");
+	}
 }
 
 // keep track of created posts
