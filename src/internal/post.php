@@ -112,13 +112,16 @@ class Post
 			if (in_array($this->id, $_SESSION["users_posts"]))
 				echo "<p class=your_post>(You)</p>";
 	
-		if ($mod_mode)
+		if (staff_session_is_valid())
 		{
 			(new ActionLink("/internal/actions/staff/delete_post.php", "delete_$this->id", "Delete"))
 				->add_data("board", $this->board)
 				->add_data("id", $this->id)
 				->finalize();
+		}
 
+		if (staff_session_is_valid() && staff_is_moderator())
+		{
 			(new ActionLink("/internal/actions/staff/ban.php", "ban_$this->id", "Ban", "GET"))
 				->add_data("ip", $this->poster_ip)
 				->finalize();
@@ -129,7 +132,6 @@ class Post
 			$staff_user = read_staff_account($this->staff_username);
 			echo "<br><h4 class=" . $staff_user->role. "_post>$this->staff_username - $staff_user->role</h4>";
 		}
-
 
 		echo "<h4 class=post_title>$this->title</h4>";	
 
@@ -158,6 +160,8 @@ class Post
 
 		echo "<p class=post_id>>>$this->id | $this->creation_time</p>";
 
+		
+
 		if ($this->is_staff_post)
 		{
 			$staff_user = read_staff_account($this->staff_username);
@@ -181,12 +185,21 @@ class Post
 			->add_data("id", $this->replies_to)
 			->add_data("reply_field_content", htmlspecialchars(">>$this->id"))
 			->finalize();
-		
-		if ($mod_mode)
+
+		if (staff_session_is_valid())
+		{
 			(new ActionLink("/internal/actions/staff/delete_post.php", "delete_$this->id", "Delete"))
 				->add_data("board", $this->board)
 				->add_data("id", $this->id)
 				->finalize();
+		}
+
+		if (staff_session_is_valid() && staff_is_moderator())
+		{
+			(new ActionLink("/internal/actions/staff/ban.php", "ban_$this->id", "Ban", "GET"))
+				->add_data("ip", $this->poster_ip)
+				->finalize();
+		}
 
 		echo "<h4>$this->title</h4>";
 		$this->format_and_show_text($this->body);
