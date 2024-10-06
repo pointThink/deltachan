@@ -18,7 +18,7 @@ body {
   margin: 0;
 }
 
-#reply_disclaimer {
+#reply_disclaimer, #staff_disclaimer {
 	margin: 0;
 	font-size: 16px;
 }
@@ -80,6 +80,20 @@ body {
 	margin-right: 0.2cm;
 	display: inline-block;
 	font-size: 12px;
+}
+
+.post .post_title {
+	display: inline-block;
+}
+
+.post .admin_post,
+.post .mod_post,
+.post .janny_post {
+	font-weight: normal;
+	font-size: 14px;
+	margin: 0px;
+	margin-right: 0.2cm;
+	display: inline-block;
 }
 
 .reply {
