@@ -8,7 +8,6 @@ if (!staff_session_is_valid() || !staff_is_admin())
 
 if (count($_POST) > 0)
 {
-	echo var_dump($_POST);
 	board_create($_POST["id"], $_POST["title"], $_POST["subtitle"]);
 	header("Location: /" . $_POST["id"] . "/");
 	die();

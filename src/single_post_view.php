@@ -22,7 +22,12 @@ $post = $database->read_post($board_id, $_GET["id"]);
 	</head>
 
 	<body>
-		<?php include "topbar.php" ?>
+		<?php
+		include "topbar.php";
+		
+		if (isset($_GET["error"]))
+				echo "<script>alert('" . $_GET["error"] . "')</script>"
+		?>
 
 		<div id="board_index_header">
 			<?php
@@ -40,6 +45,8 @@ $post = $database->read_post($board_id, $_GET["id"]);
 
 		<div class=post_form>
 			<?php
+				if (staff_session_is_valid())
+					echo "<p id=staff_disclaimer>Posting as staff</p>";
 				echo "<p id=reply_disclaimer>Replying to >$post->id</p>";
 
 				(new PostForm("/internal/actions/post.php", "POST"))

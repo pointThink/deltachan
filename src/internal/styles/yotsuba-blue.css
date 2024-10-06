@@ -14,6 +14,18 @@ hr {
 	color: brown;
 }
 
+.post .admin_post {
+	color: red;
+}
+
+.post .mod_post {
+	color: blue;
+}
+
+.post .janny_post {
+	color: green;
+}
+
 .reply {
 	background: #d6daf0;
 }
@@ -51,7 +63,15 @@ a:link, a:visited {
 	margin-left: 2px;
 	margin-right: 3px;
 	border: 1px solid black;
-	background: #ff6340;
+	background: #40d9ff;
+	color: black;
+}
+
+#staff_disclaimer {
+	margin-left: 2px;
+	margin-right: 3px;
+	border: 1px solid black;
+	background: #ff5a5a;
 	color: black;
 }
 

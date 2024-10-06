@@ -20,6 +20,9 @@ include_once "internal/bans.php";
 	<body>
 		<?php
 			include "topbar.php";
+
+			if (isset($_GET["error"]))
+				echo "<script>alert('" . $_GET["error"] . "')</script>"
 		?>
 
 		<div id="board_index_header">
@@ -38,6 +41,9 @@ include_once "internal/bans.php";
 
 		<div class=post_form>
 			<?php
+				if (staff_session_is_valid())
+					echo "<p id=staff_disclaimer>Posting as staff</p>";
+
 				(new PostForm("/internal/actions/post.php", "POST"))
 					->add_text_field("Title", "title")
 					->add_text_area("Comment", "comment")

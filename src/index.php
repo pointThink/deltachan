@@ -1,15 +1,15 @@
-<!DOCTYPE html>
 <?php
-	include_once "internal/board.php";
-	include_once "internal/bans.php";
-
 	if (is_file("first_run"))
 	{
 		header("Location: /first_setup.php");
 		die();
 	}
+
+	include_once "internal/board.php";
+	include_once "internal/bans.php";
 ?>
 
+<!DOCTYPE html>
 <html>
 	<head>
 		<?php

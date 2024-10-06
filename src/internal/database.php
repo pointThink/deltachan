@@ -34,7 +34,6 @@ class Database
 	public function setup_meta_info_database()
 	{
 		global $deltachan_config;
-		echo var_dump($deltachan_config);
 		$this->mysql_connection->query("create database if not exists " . $deltachan_config["database_name"] . ";");
 		
 		$this->query("

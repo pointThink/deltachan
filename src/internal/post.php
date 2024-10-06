@@ -111,7 +111,7 @@ class Post
 		if	($_SESSION["users_posts"] != NULL)
 			if (in_array($this->id, $_SESSION["users_posts"]))
 				echo "<p class=your_post>(You)</p>";
-
+	
 		if ($mod_mode)
 		{
 			(new ActionLink("/internal/actions/staff/delete_post.php", "delete_$this->id", "Delete"))
@@ -124,7 +124,15 @@ class Post
 				->finalize();
 		}
 
-		echo "<h4>$this->title</h4>";
+		if ($this->is_staff_post)
+		{
+			$staff_user = read_staff_account($this->staff_username);
+			echo "<br><h4 class=" . $staff_user->role. "_post>$this->staff_username - $staff_user->role</h4>";
+		}
+
+
+		echo "<h4 class=post_title>$this->title</h4>";	
+
 		$this->format_and_show_text($this->body);
 
 		if (count($this->replies) > 0 & $show_hide_replies_button)
@@ -149,6 +157,12 @@ class Post
 			$this->display_attachment();	
 
 		echo "<p class=post_id>>>$this->id | $this->creation_time</p>";
+
+		if ($this->is_staff_post)
+		{
+			$staff_user = read_staff_account($this->staff_username);
+			echo "<br><h4 class=" . $staff_user->role. "_post>$this->staff_username - $staff_user->role</h4>";
+		}
 
 		if	($_SESSION["users_posts"] != NULL)
 			if (in_array($this->id, $_SESSION["users_posts"]))
