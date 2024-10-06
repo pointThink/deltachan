@@ -22,7 +22,12 @@ $post = $database->read_post($board_id, $_GET["id"]);
 	</head>
 
 	<body>
-		<?php include "topbar.php" ?>
+		<?php
+		include "topbar.php";
+		
+		if (isset($_GET["error"]))
+				echo "<script>alert('" . $_GET["error"] . "')</script>"
+		?>
 
 		<div id="board_index_header">
 			<?php
