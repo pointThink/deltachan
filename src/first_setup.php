@@ -18,6 +18,7 @@
 			<br>
 
 			<label>Host</label><input type=text name=database_host><br>
+			<label>DB Name</label><input type=text name=database_name><br>
 			<label>User</label><input type=text name=database_user><br>
 			<label>Password</label><input type=password name=database_password><br>
 			<br>

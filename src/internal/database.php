@@ -33,7 +33,9 @@ class Database
 
 	public function setup_meta_info_database()
 	{
-		$this->query("create database if not exists deltachan;");
+		global $deltachan_config;
+		echo var_dump($deltachan_config);
+		$this->mysql_connection->query("create database if not exists " . $deltachan_config["database_name"] . ";");
 		
 		$this->query("
 			create table if not exists board_info (
@@ -168,7 +170,8 @@ class Database
 
 	public function query($str)
 	{
-		$this->mysql_connection->select_db("deltachan");
+		global $deltachan_config;
+		$this->mysql_connection->select_db($deltachan_config["database_name"]);
 		return $this->mysql_connection->query($str);
 	}
 }

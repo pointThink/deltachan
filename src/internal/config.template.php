@@ -5,5 +5,6 @@ $deltachan_config = array(
 	// database login info
 	"database_host" => "%database_host%",
 	"database_user" => "%database_user%",
+	"database_name" => "%database_name%",
 	"database_password" => "%database_password%",
 );
