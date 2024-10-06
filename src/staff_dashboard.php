@@ -12,6 +12,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Staff dashboard</title>
 		<?php include "internal/link_css.php"; ?>
 	</head>
 

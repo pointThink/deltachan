@@ -9,3 +9,10 @@ site-build
 src/first_run
 src/internal/config.php
 src/internal/chaninfo.json
+
+# those are some example boards i set up
+b
+tech
+v
+tv
+qa

@@ -45,15 +45,17 @@
 		<div class=list>
 			<h3 class=list_title>Boards</h3>
 			<div class=list_content>
-			<?php
-				$boards = board_list();
+				<ul>
+				<?php
+					$boards = board_list();
 
-				foreach ($boards as $board)
-				{
-					echo "<a href=$board->id/>$board->title</a><br>";
-				}
+					foreach ($boards as $board)
+					{
+						echo "<li><a href=$board->id/>/$board->id/ - $board->title</a></li>";
+					}
 
-			?>
+				?>
+				</ul>
 			</div>
 		</div>
 		
