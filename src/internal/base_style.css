@@ -64,11 +64,10 @@ body {
 }
 
 #posts {
-	padding: 0.3cm;
+	padding: 0.2cm;
 }
 
 .post {
-	padding: 0.2cm;
 	display: inline-block;
 	width: 100%;
 	max-width: 100%;
@@ -162,6 +161,10 @@ form .clear_file, form .file_upload {
 	width: 100px;
 	font-size: 10px;
 	text-align: center;
+}
+
+#topbar {
+	margin-bottom: 0.5cm;
 }
 
 #topbar #theme_selector_section {

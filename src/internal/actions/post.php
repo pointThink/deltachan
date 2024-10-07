@@ -58,7 +58,7 @@ if ($_FILES["file"]["size"] > 0)
 	move_uploaded_file($_FILES["file"]["tmp_name"], __DIR__ . "/../../" . $target_file);
 	$database->update_post_file($result->board, $result->id, $target_file);
 
-	if (str_starts_with(mime_content_type($_FILES["file"]["tmp_name"]), "image"))
+	if (str_starts_with($_FILES["file"]["type"], "image"))
 	{
 		// create image thumbnail
 		$image_data = file_get_contents(__DIR__ . "/../../" . $target_file);
