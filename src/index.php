@@ -7,6 +7,8 @@
 
 	include_once "internal/board.php";
 	include_once "internal/bans.php";
+
+	$database = new Database();
 ?>
 
 <!DOCTYPE html>
@@ -43,18 +45,35 @@
 		<br>
 
 		<div class=list>
-			<h3 class=list_title>Boards</h3>
-			<div class=list_content>
-			<?php
+			<table class="boards_table">
+				<tr>
+					<th>Board</th>
+					<th>Title</th>
+					<th>Subtitle</th>
+					<th>Posts</th>
+				</tr>
+
+				<?php
 				$boards = board_list();
 
 				foreach ($boards as $board)
 				{
-					echo "<a href=$board->id/>$board->title</a><br>";
+					$query_result = $database->query("select count(*) from posts_$board->id");
+					$post_count += intval($query_result->fetch_assoc()["count(*)"]);
+
+					echo "<tr>
+					<td class=table_board_id><a href=$board->id/>/$board->id/</a></td>
+					<td class=table_board_title><a href=$board->id/>$board->title</a></td>
+					<td class=table_board_subtitle>$board->subtitle</td>
+					<td class=table_board_post_count>$post_count</td>
+					</tr>";
+
+					unset($query_result);
+					unset($post_count);
 				}
 
-			?>
-			</div>
+				?>
+			</table>
 		</div>
 		
 		<br>
@@ -70,8 +89,6 @@
 					
 						return round(pow(1024, $base - floor($base)), $precision) .' '. $suffixes[floor($base)] . "B";
 					}
-
-					$database = new Database();
 
 					$post_count = 0;
 

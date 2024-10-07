@@ -24,6 +24,8 @@ class Post
 	public $is_staff_post;
 	public $staff_username;
 
+	public $approved;
+
 	public $replies = array();
 
 	public function display_attachment()
@@ -66,20 +68,23 @@ class Post
     	// italic
 	    $ret = preg_replace('/\*(.+)\*/sU', '<i>$1</i>', $ret);
 
-		preg_match('/&gt;&gt;[0-9]+/', $ret, $matches, PREG_OFFSET_CAPTURE);
+		preg_match_all('/&gt;&gt;[0-9]+/', $ret, $matches, PREG_OFFSET_CAPTURE);
 		
-		foreach ($matches as $match)
+		foreach ($matches[0] as $match)
 		{
 			$match_string = $match[0];
 			$id = intval(substr($match[0], 8));
-			
+			$format = ">>$id ";
+
 			if ($_SESSION["users_posts"] != NULL)
+			{
 				if (in_array($id, $_SESSION["users_posts"]))
-					$ret = preg_replace("/$match_string/", "<a href=# onclick=scroll_to_post('$id')>$0 (You)</a>", $ret);
-				else
-					$ret = preg_replace("/$match_string/", "<a href=# onclick=scroll_to_post('$id')>$0</a>", $ret);
-			else
-				$ret = preg_replace("/$match_string/", "<a href=# onclick=scroll_to_post('$id')>$0</a>", $ret);
+					$format .= "(You)";
+				if ($id == strval($this->replies_to))
+					$format .= "(OP)";
+			}
+
+			$ret = preg_replace("/$match_string/", "<a href=# onclick=scroll_to_post('$id')>$format</a>", $ret);
 		}
 
 		$textParts = explode("\n", $ret);
@@ -108,30 +113,41 @@ class Post
 
 		echo "<a class=post_id href=/$this->board/post.php?id=$this->id>>>$this->id | $this->creation_time</a>";
 
+		if ($this->is_staff_post)
+		{
+			$staff_user = read_staff_account($this->staff_username);
+			echo "<h4 class=" . $staff_user->role. "_post>$this->staff_username - $staff_user->role</h4>";
+		}
+
 		if	($_SESSION["users_posts"] != NULL)
 			if (in_array($this->id, $_SESSION["users_posts"]))
 				echo "<p class=your_post>(You)</p>";
 	
-		if ($mod_mode)
+		if (staff_session_is_valid())
 		{
 			(new ActionLink("/internal/actions/staff/delete_post.php", "delete_$this->id", "Delete"))
 				->add_data("board", $this->board)
 				->add_data("id", $this->id)
 				->finalize();
+		}
 
+		if (staff_session_is_valid() && staff_is_moderator())
+		{
 			(new ActionLink("/internal/actions/staff/ban.php", "ban_$this->id", "Ban", "GET"))
 				->add_data("ip", $this->poster_ip)
 				->finalize();
+
+			if (!$this->approved)
+			{
+				(new ActionLink("/internal/actions/staff/approve_post.php", "approve_$this->id", "Approve"))
+					->add_data("board", $this->board)
+					->add_data("id", $this->id)
+					->finalize();
+			}
 		}
 
-		if ($this->is_staff_post)
-		{
-			$staff_user = read_staff_account($this->staff_username);
-			echo "<br><h4 class=" . $staff_user->role. "_post>$this->staff_username - $staff_user->role</h4>";
-		}
-
-
-		echo "<h4 class=post_title>$this->title</h4>";	
+		if ($this->title != "")
+			echo "<br><h4 class=post_title>$this->title</h4>";	
 
 		$this->format_and_show_text($this->body);
 
@@ -161,7 +177,7 @@ class Post
 		if ($this->is_staff_post)
 		{
 			$staff_user = read_staff_account($this->staff_username);
-			echo "<br><h4 class=" . $staff_user->role. "_post>$this->staff_username - $staff_user->role</h4>";
+			echo "<h4 class=" . $staff_user->role. "_post>$this->staff_username - $staff_user->role</h4>";
 		}
 
 		if	($_SESSION["users_posts"] != NULL)
@@ -181,12 +197,29 @@ class Post
 			->add_data("id", $this->replies_to)
 			->add_data("reply_field_content", htmlspecialchars(">>$this->id"))
 			->finalize();
-		
-		if ($mod_mode)
+
+		if (staff_session_is_valid())
+		{
 			(new ActionLink("/internal/actions/staff/delete_post.php", "delete_$this->id", "Delete"))
 				->add_data("board", $this->board)
 				->add_data("id", $this->id)
 				->finalize();
+		}
+
+		if (staff_session_is_valid() && staff_is_moderator())
+		{
+			(new ActionLink("/internal/actions/staff/ban.php", "ban_$this->id", "Ban", "GET"))
+				->add_data("ip", $this->poster_ip)
+				->finalize();
+
+			if (!$this->approved)
+			{
+				(new ActionLink("/internal/actions/staff/approve_post.php", "approve_$this->id", "Approve"))
+					->add_data("board", $this->board)
+					->add_data("id", $this->id)
+					->finalize();
+			}
+		}
 
 		echo "<h4>$this->title</h4>";
 		$this->format_and_show_text($this->body);

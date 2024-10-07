@@ -64,11 +64,10 @@ body {
 }
 
 #posts {
-	padding: 0.3cm;
+	padding: 0.2cm;
 }
 
 .post {
-	padding: 0.2cm;
 	display: inline-block;
 	width: 100%;
 	max-width: 100%;
@@ -90,7 +89,7 @@ body {
 .post .mod_post,
 .post .janny_post {
 	font-weight: normal;
-	font-size: 14px;
+	font-size: 12px;
 	margin: 0px;
 	margin-right: 0.2cm;
 	display: inline-block;
@@ -100,7 +99,7 @@ body {
 	width: fit-content;
 	overflow-x: auto;
 	padding: 0.2cm;
-	margin: 0.2cm;
+	margin: 0.1cm;
 }
 
 .greentext {
@@ -116,7 +115,9 @@ body {
 }
 
 .post pre {
-  text-wrap: wrap;
+	font-family: sans-serif;
+	font-size: 13px;
+	text-wrap: wrap;
 }
 
 .post .post_id, .post form, .post .hide_replies_button, .action_link {
@@ -164,6 +165,10 @@ form .clear_file, form .file_upload {
 	text-align: center;
 }
 
+#topbar {
+	margin-bottom: 0.5cm;
+}
+
 #topbar #theme_selector_section {
 	box-sizing: border-box;
 	height: 100%;
@@ -173,8 +178,8 @@ form .clear_file, form .file_upload {
 #topbar a, #topbar p {
 	padding: 0;
 	margin: 0;
-	margin-right: 0.05cm;
-	margin-left: 0.05cm;
+	margin-right: 0.1cm;
+	margin-left: 0.1cm;
 	font-size: 12px;
 	display: inline-block;
 }
@@ -221,9 +226,6 @@ form .clear_file, form .file_upload {
 	margin: auto;
 }
 
-.manage_table td, .manage_table th {
-}
-
 .manage_link {
 	text-align: center;
 	display: block;
@@ -247,6 +249,15 @@ form .clear_file, form .file_upload {
 	margin: 0;
 }
 
+.list .boards_table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.list .boards_table .table_board_post_count {
+	text-align: center;
+}
+
 .list_content p,
 .list_content pre,
 .list_content h1,
@@ -265,3 +276,6 @@ form .clear_file, form .file_upload {
 	margin: 0;
 }
 
+.list .boards_table td {
+	padding: 0.2cm;
+}

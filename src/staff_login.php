@@ -1,5 +1,12 @@
 <?php
 include_once "internal/ui.php";
+include_once "internal/staff_session.php";
+
+if (staff_session_is_valid())
+{
+	header("Location: /staff_dashboard.php");
+	die();
+}
 ?>
 
 <!DOCTYPE html>

@@ -34,14 +34,14 @@ $target_file = "";
 $database = new Database();
 
 // If user is logged in as staff create a staff post
-$is_mod_post = false;
+$is_mod_post = "0";
 $mod_user = "";
 
 if (staff_session_is_valid())
 {
 	$user = staff_get_current_user();
 	$mod_user = $user->username;
-	$is_mod_post = true;
+	$is_mod_post = "1";
 }
 
 $result = $database->write_post(
@@ -58,7 +58,7 @@ if ($_FILES["file"]["size"] > 0)
 	move_uploaded_file($_FILES["file"]["tmp_name"], __DIR__ . "/../../" . $target_file);
 	$database->update_post_file($result->board, $result->id, $target_file);
 
-	if (str_starts_with(mime_content_type($_FILES["file"]["tmp_name"]), "image"))
+	if (str_starts_with($_FILES["file"]["type"], "image"))
 	{
 		// create image thumbnail
 		$image_data = file_get_contents(__DIR__ . "/../../" . $target_file);
