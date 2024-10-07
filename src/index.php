@@ -29,10 +29,6 @@
 			include "topbar.php";
 		?>
 
-		<?php
-			echo "<h1 class=title>$chan_info->chan_name</h1>";
-		?>
-
 		<div class="list">
 			<?php echo "<h3 class=\"list_title\">Welcome to $chan_info->chan_name</h3>" ?>
 			<div class="list_content">

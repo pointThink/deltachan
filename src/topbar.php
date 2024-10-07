@@ -41,3 +41,14 @@
 		</select>
 	</div>
 </div>
+
+<div id=site_banner>
+	<?php
+		// list all banners
+		$banners = array_diff(scandir(__DIR__ . "/static/banners/"), array(".", ".."));
+		sort($banners);
+		$banner_number = rand(0, count($banners) - 1);
+		$banner = $banners[$banner_number];
+		echo "<img src='/static/banners/$banner'>";
+	?>
+</div>

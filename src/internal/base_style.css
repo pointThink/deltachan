@@ -279,3 +279,15 @@ form .clear_file, form .file_upload {
 .list .boards_table td {
 	padding: 0.2cm;
 }
+
+#site_banner {
+	max-width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+
+	margin-bottom: 0.5cm;
+}
+
+#site_banner img {
+	height: 100px;
+}
