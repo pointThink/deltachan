@@ -24,6 +24,8 @@ class Post
 	public $is_staff_post;
 	public $staff_username;
 
+	public $approved;
+
 	public $replies = array();
 
 	public function display_attachment()
@@ -125,6 +127,14 @@ class Post
 			(new ActionLink("/internal/actions/staff/ban.php", "ban_$this->id", "Ban", "GET"))
 				->add_data("ip", $this->poster_ip)
 				->finalize();
+
+			if (!$this->approved)
+			{
+				(new ActionLink("/internal/actions/staff/approve_post.php", "approve_$this->id", "Approve"))
+					->add_data("board", $this->board)
+					->add_data("id", $this->id)
+					->finalize();
+			}
 		}
 
 		if ($this->is_staff_post)

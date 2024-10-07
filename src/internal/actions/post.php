@@ -34,14 +34,14 @@ $target_file = "";
 $database = new Database();
 
 // If user is logged in as staff create a staff post
-$is_mod_post = false;
+$is_mod_post = "0";
 $mod_user = "";
 
 if (staff_session_is_valid())
 {
 	$user = staff_get_current_user();
 	$mod_user = $user->username;
-	$is_mod_post = true;
+	$is_mod_post = "1";
 }
 
 $result = $database->write_post(

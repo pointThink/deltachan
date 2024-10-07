@@ -82,6 +82,8 @@ class Database
 			$is_reply, $replies_to, '$title', '$body', '$poster_ip', '$poster_country', $is_staff_post, '$staff_username', 0
 		);";
 
+		echo $query;
+
 		$query_result = $this->query($query);
 
 		// return the newly created post
@@ -138,6 +140,8 @@ class Database
 		$post->is_staff_post = $post_array["is_staff_post"];
 		$post->staff_username = $post_array["staff_username"];
 
+		$post->approved = $post_array["approved"];
+
 		if (!$post_array["is_reply"])
 			$post->replies = $this->get_post_replies($board, $id);
 
@@ -165,6 +169,15 @@ class Database
 			array_push($replies, $this->read_post($board, $reply["id"]));
 
 		return $replies;
+	}
+
+	public function approve_post($board, $post)
+	{
+		$this->query(
+			"update posts_$board
+			set approved = 1
+			where id = $post;"
+		);
 	}
 
 	public function query($str)

@@ -63,7 +63,7 @@
 					<h4 class=list_title>Moderator actions</h4>
 					<div class="list_content">
 						<ul>
-							<li><a href=/internal/actions/staff/approve_posts.php>(TODO) View unnaproved posts</a></li>
+							<li><a href=/internal/staff_forms/approve_posts.php>View unnaproved posts</a></li>
 							<li><a href=/internal/actions/staff/view_reports.php>(TODO) View reported posts</a></li>
 							<li><a href=/internal/staff_forms/manage_bans.php>Manage bans</a></li>
 						</ul>
