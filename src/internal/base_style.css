@@ -89,7 +89,7 @@ body {
 .post .mod_post,
 .post .janny_post {
 	font-weight: normal;
-	font-size: 14px;
+	font-size: 12px;
 	margin: 0px;
 	margin-right: 0.2cm;
 	display: inline-block;
@@ -99,7 +99,7 @@ body {
 	width: fit-content;
 	overflow-x: auto;
 	padding: 0.2cm;
-	margin: 0.2cm;
+	margin: 0.1cm;
 }
 
 .greentext {
