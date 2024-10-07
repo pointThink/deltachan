@@ -92,3 +92,16 @@ a:link, a:visited {
 .list .list_title {
 	background-color: #9988ee;
 }
+
+.list .boards_table th {
+	background-color: #9988ee;
+}
+
+
+.list .boards_table tr {
+	background-color: #ffffff;
+}
+
+.list .boards_table tr:nth-of-type(odd) {
+	background-color: #eeeeee;
+}

@@ -115,7 +115,9 @@ body {
 }
 
 .post pre {
-  text-wrap: wrap;
+	font-family: sans-serif;
+	font-size: 13zpx;
+	text-wrap: wrap;
 }
 
 .post .post_id, .post form, .post .hide_replies_button, .action_link {
@@ -224,9 +226,6 @@ form .clear_file, form .file_upload {
 	margin: auto;
 }
 
-.manage_table td, .manage_table th {
-}
-
 .manage_link {
 	text-align: center;
 	display: block;
@@ -250,6 +249,15 @@ form .clear_file, form .file_upload {
 	margin: 0;
 }
 
+.list .boards_table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.list .boards_table .table_board_post_count {
+	text-align: center;
+}
+
 .list_content p,
 .list_content pre,
 .list_content h1,
@@ -268,3 +276,6 @@ form .clear_file, form .file_upload {
 	margin: 0;
 }
 
+.list .boards_table td {
+	padding: 0.2cm;
+}

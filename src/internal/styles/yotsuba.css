@@ -97,3 +97,15 @@ a:link, a:visited {
 .post .janny_post {
 	color: green;
 }
+
+.list .boards_table th {
+	background-color: #eeaa88
+}
+
+.list .boards_table tr {
+	background-color: #ffffff;
+}
+
+.list .boards_table tr:nth-of-type(odd) {
+	background-color: #eeeeee;
+}
