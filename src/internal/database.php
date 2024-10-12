@@ -141,6 +141,7 @@ class Database
 		$post->staff_username = $post_array["staff_username"];
 
 		$post->approved = $post_array["approved"];
+		$post->sticky = $post_array["sticky"];
 
 		if (!$post_array["is_reply"])
 			$post->replies = $this->get_post_replies($board, $id);
@@ -178,6 +179,15 @@ class Database
 			set approved = 1
 			where id = $post;"
 		);
+	}
+
+	public function make_post_sticky($board, $post)
+	{
+		$this->query("
+			update posts_$board
+			set sticky = not sticky
+			where id = $post;
+		");
 	}
 
 	public function query($str)

@@ -25,6 +25,7 @@ class Post
 	public $staff_username;
 
 	public $approved;
+	public $sticky;
 
 	public $replies = array();
 
@@ -111,6 +112,8 @@ class Post
 		if ($this->image_file != "")
 			$this->display_attachment();
 
+		if ($this->sticky)
+			echo "<img class=pin src=/pin.png>";
 		echo "<a class=post_id href=/$this->board/post.php?id=$this->id>>>$this->id | $this->creation_time</a>";
 
 		if ($this->is_staff_post)
@@ -140,6 +143,21 @@ class Post
 			if (!$this->approved)
 			{
 				(new ActionLink("/internal/actions/staff/approve_post.php", "approve_$this->id", "Approve"))
+					->add_data("board", $this->board)
+					->add_data("id", $this->id)
+					->finalize();
+			}
+
+			if ($this->sticky)
+			{
+				(new ActionLink("/internal/actions/staff/sticky_post.php", "approve_$this->id", "Unstick"))
+					->add_data("board", $this->board)
+					->add_data("id", $this->id)
+					->finalize();
+			}
+			else
+			{
+				(new ActionLink("/internal/actions/staff/sticky_post.php", "approve_$this->id", "Sticky"))
 					->add_data("board", $this->board)
 					->add_data("id", $this->id)
 					->finalize();

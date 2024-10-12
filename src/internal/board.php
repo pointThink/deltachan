@@ -63,6 +63,7 @@ function setup_board_table($board_id)
 			is_staff_post int not null,
 			staff_username varchar(255),
 
+			sticky int default 0,
 			approved int not null default 0
 		);
 	");

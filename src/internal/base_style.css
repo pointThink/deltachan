@@ -13,6 +13,14 @@ body {
   text-align: center;
 }
 
+.pin {
+	line-height: normal;
+	vertical-align: middle;
+	height: 16px;
+	display: inline;
+	margin-right: 0.1cm;
+}
+
 .title {
 	margin-bottom: 1cm;
 }

@@ -55,14 +55,32 @@ include_once "internal/bans.php";
 
 		<div id="posts">
 			<?php
+				$sticky_posts = array();
+				$posts = array();
+
+				foreach ($board->posts as $post)
+				{
+					if ($post->sticky)
+						array_push($sticky_posts, $post);
+					else
+						array_push($posts, $post);
+				}
+
 				function sort_func($o1, $o2)
 				{
 					return $o1->bump_time < $o2->bump_time;
 				}
 
-				usort($board->posts, "sort_func");
+				usort($sticky_posts, "sort_func");
+				usort($posts, "sort_func");
 
-				foreach ($board->posts as $post)
+				foreach ($sticky_posts as $post)
+				{
+					echo "<hr>";
+					$post->display($mod_mode, true);
+				}
+
+				foreach ($posts as $post)
 				{
 					echo "<hr>";
 					$post->display($mod_mode, true);
