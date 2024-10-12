@@ -25,7 +25,7 @@ include_once "internal/bans.php";
 				echo "<script>alert('" . $_GET["error"] . "')</script>"
 		?>
 
-		<div id="board_index_header">
+		<div class="title">
 			<?php
 				$mod_mode = staff_session_is_valid();
 

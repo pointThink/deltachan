@@ -149,7 +149,9 @@ class Post
 		if ($this->title != "")
 			echo "<br><h4 class=post_title>$this->title</h4>";	
 
+		echo "<div class=post_comment>";
 		$this->format_and_show_text($this->body);
+		echo "</div>";
 
 		if (count($this->replies) > 0 & $show_hide_replies_button)
 			echo "<a href='#' class=hide_replies_button id=hide_replies_$this->id onclick='hide_replies(\"$this->id\")'>Hide replies</a>";
@@ -221,8 +223,9 @@ class Post
 			}
 		}
 
-		echo "<h4>$this->title</h4>";
+		echo "<div class=post_comment>";
 		$this->format_and_show_text($this->body);
+		echo "</div>";
 		echo "</div>";
 	}
 }

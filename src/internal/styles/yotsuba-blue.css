@@ -6,8 +6,12 @@ body {
 
 hr {
     border: none;
-    background-color: #00000066;
-    height: 1px;
+    border-top: 1px solid #b7c5d9;
+    height: 0;
+}
+
+.title {
+	color: #AF0A0F;
 }
 
 .post .your_post {

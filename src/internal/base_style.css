@@ -13,6 +13,18 @@ body {
   text-align: center;
 }
 
+.title {
+	margin-bottom: 1cm;
+}
+
+.title h4 {
+	font-weight: normal;
+}
+
+.title * {
+	margin: 0.2cm;
+}
+
 #staff_dashboard_title h4,
 #staff_dashboard_title a {
   margin: 0;
@@ -99,7 +111,7 @@ body {
 	width: fit-content;
 	overflow-x: auto;
 	padding: 0.2cm;
-	margin: 0.1cm;
+	margin: 0.2cm;
 }
 
 .greentext {
@@ -148,6 +160,7 @@ form .clear_file, form .file_upload {
 	max-height: 200px;
 
 	float: left;
+	border: none;
 	display: inline-block;
 
 	margin-right: 0.2cm;
