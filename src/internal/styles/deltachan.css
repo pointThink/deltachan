@@ -37,6 +37,7 @@ hr {
 .post {
     background-color: none;
     margin: 0;
+    font-family: system-ui;
 }
 
 .reply {
@@ -47,6 +48,7 @@ hr {
 }
 
 #topbar {
+    box-shadow: 0 0 10px #00000044;
     padding: 0.1cm;
     background: #d0d0f7;
     border-bottom: 1px solid #373599;
@@ -59,7 +61,7 @@ hr {
 }
 
 a:link, a:visited {
-  color: #34345c;
+  color: navy;
 }
 
 #staff_dashboard_content {

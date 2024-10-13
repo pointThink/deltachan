@@ -71,8 +71,8 @@ class Database
 		$is_reply = intval($is_reply);
 
 		// prevent sql injection
-		$title = $this->mysql_connection->real_escape_string($title);
-		$body = $this->mysql_connection->real_escape_string($body);	
+		$title = $this->sanitize($title);
+		$body = $this->sanitize($body);	
 
 		$query = "insert into posts_$board_id(
 			is_reply, replies_to, title, post_body, poster_ip, poster_country, is_staff_post, staff_username, approved
@@ -90,6 +90,9 @@ class Database
 
 	public function bump_post($board, $id)
 	{
+		$board = $this->sanitize($board);
+		$id = $this->sanitize($id);
+
 		$this->query("
 			update posts_$board
 			set bump_time = current_timestamp
@@ -99,6 +102,10 @@ class Database
 
 	public function update_post_file($board, $id, $file)
 	{
+		$board = $this->sanitize($board);
+		$id = $this->sanitize($id);
+		$file = $this->sanitize($file);
+
 		$file = $this->mysql_connection->real_escape_string($file);
 
 		$this->query("
@@ -111,6 +118,9 @@ class Database
 	// returns a post object
 	public function read_post($board, $id)
 	{
+		$id = $this->sanitize($id);
+		$board = $this->sanitize($board);
+
 		$post = new Post();
 
 		$query_result = $this->query("select * from posts_$board where id = $id;");
@@ -156,6 +166,9 @@ class Database
 
 	public function get_post_replies($board, $post)
 	{
+		$post = $this->sanitize($post);
+		$board = $this->sanitize($board);
+
 		$replies = array();
 		$this->mysql_connection->select_db("deltachan");
 		$id_str = strval($post);
@@ -186,6 +199,11 @@ class Database
 			set sticky = not sticky
 			where id = $post;
 		");
+	}
+
+	public function sanitize($str)
+	{
+		return $this->mysql_connection->real_escape_string($str);
 	}
 
 	public function query($str)
