@@ -95,13 +95,13 @@ function show_pages()
 				foreach ($sticky_posts as $post)
 				{
 					echo "<hr>";
-					$post->display($mod_mode, true);
+					$post->display(true);
 				}
 
 				foreach ($posts as $post)
 				{
 					echo "<hr>";
-					$post->display($mod_mode, true);
+					$post->display(true);
 				}
 			?>	
 		</div>

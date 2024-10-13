@@ -2,6 +2,7 @@
 include_once "internal/database.php";
 include_once "internal/board.php";
 include_once "internal/ui.php";
+include_once "internal/staff_session.php";
 
 $database = new Database();
 $post = $database->read_post($board_id, $_GET["id"]);
@@ -61,7 +62,7 @@ $post = $database->read_post($board_id, $_GET["id"]);
 
 		<div id=posts>
 			<?php
-				$post->display($mod_mode);
+				$post->display();
 			?>
 		</div>
 

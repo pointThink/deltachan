@@ -1,7 +1,5 @@
 <?php
 include_once __DIR__ . "/post.php";
-include_once __DIR__ . "/board.php";
-include_once __DIR__ . "/staff_session.php";
 include_once __DIR__ . "/config.php";
 
 class Database

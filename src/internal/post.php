@@ -105,16 +105,23 @@ class Post
     	echo "</div>\n";
 	}
 
-	public function display($mod_mode = false, $show_hide_replies_button = false)
+	public function display($show_hide_replies_button = false)
 	{
-		echo "<div class=post id=post_$this->id>";
+		if (!$this->is_reply)
+			echo "<div class=post id=post_$this->id>";
+		else
+			echo "<div class=reply id=post_$this->id>";
 
 		if ($this->image_file != "")
 			$this->display_attachment();
 
 		if ($this->sticky)
 			echo "<img class=pin src=/pin.png>";
-		echo "<a class=post_id href=/$this->board/post.php?id=$this->id>>>$this->id | $this->creation_time</a>";
+
+		if (!$this->is_reply)
+			echo "<a class=post_id href=/$this->board/post.php?id=$this->id>>>$this->id | $this->creation_time</a>";
+		else
+			echo "<p class=post_id>>>$this->id | $this->creation_time</p>";
 
 		if ($this->is_staff_post)
 		{
@@ -126,6 +133,23 @@ class Post
 			if (in_array($this->id, $_SESSION["users_posts"]))
 				echo "<p class=your_post>(You)</p>";
 	
+		if ($this->is_reply)
+		{
+			$quote_content = "";
+			foreach (explode("\n", $this->body) as $line)
+				$quote_content .= ">$line\n";
+
+			(new ActionLink("/$this->board/post.php", "quote_$this->id", "Quote", "GET"))
+				->add_data("id", $this->replies_to)
+				->add_data("reply_field_content", htmlspecialchars($quote_content))
+				->finalize();
+
+			(new ActionLink("/$this->board/post.php", "reply_$this->id", "Reply", "GET"))
+				->add_data("id", $this->replies_to)
+				->add_data("reply_field_content", htmlspecialchars(">>$this->id"))
+				->finalize();
+		}
+
 		if (staff_session_is_valid())
 		{
 			(new ActionLink("/internal/actions/staff/delete_post.php", "delete_$this->id", "Delete"))
@@ -148,19 +172,22 @@ class Post
 					->finalize();
 			}
 
-			if ($this->sticky)
+			if (!$this->is_reply)
 			{
-				(new ActionLink("/internal/actions/staff/sticky_post.php", "approve_$this->id", "Unstick"))
-					->add_data("board", $this->board)
-					->add_data("id", $this->id)
-					->finalize();
-			}
-			else
-			{
-				(new ActionLink("/internal/actions/staff/sticky_post.php", "approve_$this->id", "Sticky"))
-					->add_data("board", $this->board)
-					->add_data("id", $this->id)
-					->finalize();
+				if ($this->sticky)
+				{
+					(new ActionLink("/internal/actions/staff/sticky_post.php", "approve_$this->id", "Unstick"))
+						->add_data("board", $this->board)
+						->add_data("id", $this->id)
+						->finalize();
+				}
+				else
+				{
+					(new ActionLink("/internal/actions/staff/sticky_post.php", "approve_$this->id", "Sticky"))
+						->add_data("board", $this->board)
+						->add_data("id", $this->id)
+						->finalize();
+				}
 			}
 		}
 
@@ -176,74 +203,9 @@ class Post
 
 		echo "<div id=replies_$this->id>";
 		foreach ($this->replies as $reply)
-			$reply->display_reply($mod_mode);
+			$reply->display(true);
 		echo "</div>";
 
-		echo "</div>";
-	}
-
-	public function display_reply($mod_mode = false)
-	{
-		echo "<div class=reply id=post_$this->id>";
-
-		$file_parts = explode(".", $this->image_file);
-		$thumb_file_name = $file_parts[0] . "-thumb.jpg";
-
-		if ($this->image_file != "")
-			$this->display_attachment();	
-
-		echo "<p class=post_id>>>$this->id | $this->creation_time</p>";
-
-		if ($this->is_staff_post)
-		{
-			$staff_user = read_staff_account($this->staff_username);
-			echo "<h4 class=" . $staff_user->role. "_post>$this->staff_username - $staff_user->role</h4>";
-		}
-
-		if	($_SESSION["users_posts"] != NULL)
-			if (in_array($this->id, $_SESSION["users_posts"]))
-				echo "<p class=your_post>(You)</p>";
-
-		$quote_content = "";
-		foreach (explode("\n", $this->body) as $line)
-			$quote_content .= ">$line\n";
-
-		(new ActionLink("/$this->board/post.php", "quote_$this->id", "Quote", "GET"))
-			->add_data("id", $this->replies_to)
-			->add_data("reply_field_content", htmlspecialchars($quote_content))
-			->finalize();
-
-		(new ActionLink("/$this->board/post.php", "reply_$this->id", "Reply", "GET"))
-			->add_data("id", $this->replies_to)
-			->add_data("reply_field_content", htmlspecialchars(">>$this->id"))
-			->finalize();
-
-		if (staff_session_is_valid())
-		{
-			(new ActionLink("/internal/actions/staff/delete_post.php", "delete_$this->id", "Delete"))
-				->add_data("board", $this->board)
-				->add_data("id", $this->id)
-				->finalize();
-		}
-
-		if (staff_session_is_valid() && staff_is_moderator())
-		{
-			(new ActionLink("/internal/actions/staff/ban.php", "ban_$this->id", "Ban", "GET"))
-				->add_data("ip", $this->poster_ip)
-				->finalize();
-
-			if (!$this->approved)
-			{
-				(new ActionLink("/internal/actions/staff/approve_post.php", "approve_$this->id", "Approve"))
-					->add_data("board", $this->board)
-					->add_data("id", $this->id)
-					->finalize();
-			}
-		}
-
-		echo "<div class=post_comment>";
-		$this->format_and_show_text($this->body);
-		echo "</div>";
 		echo "</div>";
 	}
 }
