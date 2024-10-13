@@ -314,7 +314,8 @@ form .clear_file, form .file_upload {
 }
 
 .board_pages {
-	padding: 0.1cm;
+	margin: 0.2cm;
+	padding: 0.3cm;
 	font-size: 12px;
 }
 

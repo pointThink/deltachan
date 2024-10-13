@@ -6,7 +6,7 @@ include_once "internal/bans.php";
 
 function show_pages()
 {
-	echo "<span class=board_pages>Pages: ";
+	echo "<div class=board_pages>Pages: ";
 	global $board;
 	
 	$page_count = $board->get_pages_count();
@@ -19,7 +19,7 @@ function show_pages()
 			echo "<a href='?p=$i'>[$i]</a>";
 	}
 
-	echo "</span>";
+	echo "</div>";
 }
 ?>
 
@@ -71,7 +71,7 @@ function show_pages()
 			?>
 		</div>
 
-			<?php show_pages(); ?>
+		<?php show_pages(); ?>
 
 		<div id="posts">
 			<?php
@@ -109,6 +109,8 @@ function show_pages()
 		
 		<script src="/internal/board_index.js"></script>	
 		<script src=/internal/post_display.js></script>
+
+		<?php show_pages(); ?>
 
 		<?php include "footer.php" ?>
 	</body>
