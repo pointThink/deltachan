@@ -3,6 +3,24 @@ include_once "internal/board.php";
 include_once "internal/ui.php";
 include_once "internal/staff_session.php";
 include_once "internal/bans.php";
+
+function show_pages()
+{
+	echo "<span class=board_pages>Pages: ";
+	global $board;
+	
+	$page_count = $board->get_pages_count();
+
+	for ($i = 0; $i < $page_count; $i++)
+	{
+		if ($i == $_GET["p"])
+			echo "<a class=selected_page href='?p=$i'>[$i]</a>";
+		else
+			echo "<a href='?p=$i'>[$i]</a>";
+	}
+
+	echo "</span>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +28,7 @@ include_once "internal/bans.php";
 	<head>
 		<?php
 			$database = new Database();
-			$board = board_get($board_id);
+			$board = board_get($board_id, $_GET["p"]);
 			echo "<title>/$board->id/ - $board->title</title>";
 		
 			include "internal/link_css.php";
@@ -52,6 +70,8 @@ include_once "internal/bans.php";
 					->finalize();
 			?>
 		</div>
+
+			<?php show_pages(); ?>
 
 		<div id="posts">
 			<?php

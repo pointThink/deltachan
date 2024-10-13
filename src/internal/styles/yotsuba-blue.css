@@ -109,3 +109,7 @@ a:link, a:visited {
 .list .boards_table tr:nth-of-type(odd) {
 	background-color: #eeeeee;
 }
+
+.board_pages {
+	padding: 0.1cm;
+}

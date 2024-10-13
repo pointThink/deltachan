@@ -312,3 +312,17 @@ form .clear_file, form .file_upload {
 #site_banner img {
 	height: 100px;
 }
+
+.board_pages {
+	padding: 0.1cm;
+	font-size: 12px;
+}
+
+.board_pages a p {
+	margin: 0.1cm;
+}
+
+.board_pages .selected_page {
+	margin: 0.1cm;
+	font-weight: bold;
+}
