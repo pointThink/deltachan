@@ -71,9 +71,7 @@ include_once "internal/bans.php";
 					return $o1->bump_time < $o2->bump_time;
 				}
 
-				usort($sticky_posts, "sort_func");
-				usort($posts, "sort_func");
-
+				
 				foreach ($sticky_posts as $post)
 				{
 					echo "<hr>";

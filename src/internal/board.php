@@ -129,7 +129,7 @@ function board_get($board_id)
 	$board->title = $board_array["title"];
 	$board->subtitle = $board_array["subtitle"];
 
-	$query_result = $database->query("select id from posts_$board_id where is_reply = 0;");
+	$query_result = $database->query("select id from posts_$board_id where is_reply = 0 order by bump_time desc;");
 	
 	while ($post_id = $query_result->fetch_assoc())
 	{
