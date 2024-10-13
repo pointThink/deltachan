@@ -1,4 +1,17 @@
+<?php
+include_once "internal/staff_session.php";
+?>
 <div id=topbar>
+	<?php
+		if (staff_session_is_valid())
+		{
+			echo "<p>[</p>";
+			echo "<p>Logged in as " . staff_get_current_user()->username . "</p>";
+			echo "<a href=/internal/actions/staff/logout.php>Logout</a>";
+			echo "<p>]</p>";
+		}
+	?>
+
 	<p>[</p>
 	<a href=/>home</a>
 	<a href=/rules.php>rules</a>

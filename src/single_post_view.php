@@ -32,15 +32,8 @@ $post = $database->read_post($board_id, $_GET["id"]);
 
 		<div class="title">
 			<?php
-				$mod_mode = staff_session_is_valid();
-
 				echo "<h2>/$board->id/ - $board->title</h2>";
 				echo "<h4>$board->subtitle</h4>";
-
-				if ($mod_mode)
-				{
-					echo "<a href=/internal/actions/staff/logout.php>Logout from staff account</a><br><br>";
-				}
 			?>
 		</div>
 
