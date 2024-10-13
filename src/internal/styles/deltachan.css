@@ -1,18 +1,37 @@
 body {
-	background: linear-gradient(180deg, #fedab5 0%, #ffffee 6cm);
-	color: #800000;
-    margin: 0;
+	background: linear-gradient(180deg, #e1e1f7 0%, #f0eff9 6cm);
+	color: black;
 	background-attachment: fixed;
 }
 
 hr {
     border: none;
-    background-color: #91222066;
-    height: 1px;
+    border-top: 1px solid #b7c5d9;
+    height: 0;
+}
+
+.title {
+	color: #AF0A0F;
 }
 
 .post .your_post {
-	color: navy;
+	color: brown;
+}
+
+.post .admin_post {
+	color: red;
+}
+
+.post .mod_post {
+	color: blue;
+}
+
+.post .janny_post {
+	color: green;
+}
+
+.reply {
+	background: #e1e1f7;
 }
 
 .post {
@@ -21,24 +40,26 @@ hr {
 }
 
 .reply {
-	background: #f0e0d6;
-  	border-top: 1px solid rgba(255, 255, 255, 0.5);
-  	border-left: 1px solid rgba(255, 255, 255, 0.5);
-  	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-  	border-right: 1px solid rgba(0, 0, 0, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 #topbar {
-  border-bottom: none;
+    padding: 0.1cm;
+    background: #d0d0f7;
+    border-bottom: 1px solid #373599;
 }
 
 .post_form th {
-	background: #eeaa88;
-	border: 1px solid #912220;
+	background: #8987ff;
+    color: white;
+	border: 1px solid #373599;
 }
 
 a:link, a:visited {
-  color: blue;
+  color: #34345c;
 }
 
 #staff_dashboard_content {
@@ -62,8 +83,8 @@ a:link, a:visited {
 }
 
 .manage_table th {
-    border: 1px solid #912220;
-	background-color: #eeaa88;
+    border: 1px solid #373599;
+	background-color: #8987ff;
 }
 
 .manage_table td {
@@ -72,32 +93,19 @@ a:link, a:visited {
 
 .list {
 	background: white;
-    border: 1px solid #912220;
+    border: 1px solid #373599;
 }
 
 .list .list_title {
-	background-color: #eeaa88;
-}
-
-.post .your_post {
-	color: brown;
-}
-
-.post .admin_post {
-	color: red;
-}
-
-.post .mod_post {
-	color: blue;
-}
-
-.post .janny_post {
-	color: green;
+	background-color: #8987ff;
+    color: white;
 }
 
 .list .boards_table th {
-	background-color: #eeaa88
+	background-color: #8987ff;
+    color: white;
 }
+
 
 .list .boards_table tr {
 	background-color: #ffffff;
@@ -108,9 +116,9 @@ a:link, a:visited {
 }
 
 .board_pages {
-	background: #f0e0d6;
+	background: #e1e1f7;
 	border-top: 1px solid rgba(255, 255, 255, 0.5);
 	border-left: 1px solid rgba(255, 255, 255, 0.5);
 	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 	border-right: 1px solid rgba(0, 0, 0, 0.25);
-  }
+}
