@@ -29,10 +29,6 @@
 			include "topbar.php";
 		?>
 
-		<?php
-			echo "<h1 class=title>$chan_info->chan_name</h1>";
-		?>
-
 		<div class="list">
 			<?php echo "<h3 class=\"list_title\">Welcome to $chan_info->chan_name</h3>" ?>
 			<div class="list_content">
@@ -51,6 +47,7 @@
 					<th>Title</th>
 					<th>Subtitle</th>
 					<th>Posts</th>
+					<th>Unique posters</th>
 				</tr>
 
 				<?php
@@ -59,13 +56,17 @@
 				foreach ($boards as $board)
 				{
 					$query_result = $database->query("select count(*) from posts_$board->id");
-					$post_count += intval($query_result->fetch_assoc()["count(*)"]);
+					$post_count = intval($query_result->fetch_assoc()["count(*)"]);
+
+					$query_result = $database->query("select count(distinct poster_ip) from posts_$board->id");
+					$unique_posters = intval($query_result->fetch_assoc()["count(distinct poster_ip)"]);
 
 					echo "<tr>
 					<td class=table_board_id><a href=$board->id/>/$board->id/</a></td>
 					<td class=table_board_title><a href=$board->id/>$board->title</a></td>
 					<td class=table_board_subtitle>$board->subtitle</td>
 					<td class=table_board_post_count>$post_count</td>
+					<td class=table_board_post_count>$unique_posters</td>
 					</tr>";
 
 					unset($query_result);

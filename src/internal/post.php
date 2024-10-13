@@ -25,6 +25,7 @@ class Post
 	public $staff_username;
 
 	public $approved;
+	public $sticky;
 
 	public $replies = array();
 
@@ -111,6 +112,8 @@ class Post
 		if ($this->image_file != "")
 			$this->display_attachment();
 
+		if ($this->sticky)
+			echo "<img class=pin src=/pin.png>";
 		echo "<a class=post_id href=/$this->board/post.php?id=$this->id>>>$this->id | $this->creation_time</a>";
 
 		if ($this->is_staff_post)
@@ -144,12 +147,29 @@ class Post
 					->add_data("id", $this->id)
 					->finalize();
 			}
+
+			if ($this->sticky)
+			{
+				(new ActionLink("/internal/actions/staff/sticky_post.php", "approve_$this->id", "Unstick"))
+					->add_data("board", $this->board)
+					->add_data("id", $this->id)
+					->finalize();
+			}
+			else
+			{
+				(new ActionLink("/internal/actions/staff/sticky_post.php", "approve_$this->id", "Sticky"))
+					->add_data("board", $this->board)
+					->add_data("id", $this->id)
+					->finalize();
+			}
 		}
 
 		if ($this->title != "")
 			echo "<br><h4 class=post_title>$this->title</h4>";	
 
+		echo "<div class=post_comment>";
 		$this->format_and_show_text($this->body);
+		echo "</div>";
 
 		if (count($this->replies) > 0 & $show_hide_replies_button)
 			echo "<a href='#' class=hide_replies_button id=hide_replies_$this->id onclick='hide_replies(\"$this->id\")'>Hide replies</a>";
@@ -221,8 +241,9 @@ class Post
 			}
 		}
 
-		echo "<h4>$this->title</h4>";
+		echo "<div class=post_comment>";
 		$this->format_and_show_text($this->body);
+		echo "</div>";
 		echo "</div>";
 	}
 }

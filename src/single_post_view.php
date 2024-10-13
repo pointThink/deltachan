@@ -29,7 +29,7 @@ $post = $database->read_post($board_id, $_GET["id"]);
 				echo "<script>alert('" . $_GET["error"] . "')</script>"
 		?>
 
-		<div id="board_index_header">
+		<div class="title">
 			<?php
 				$mod_mode = staff_session_is_valid();
 

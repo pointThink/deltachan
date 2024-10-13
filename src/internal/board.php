@@ -33,11 +33,20 @@ include __DIR__ . '/../single_post_view.php';
 
 class Board
 {
-	public $board_id;
-	public $board_title;
-	public $board_subtitle;
+	public $id;
+	public $title;
+	public $subtitle;
 
 	public $posts = array();
+
+	public function get_pages_count()
+	{
+		$database = new Database();
+		$query_result = $database->query("select count(*) from posts_$this->id where is_reply = 0;");
+		$post_count = intval($query_result->fetch_assoc()["count(*)"]);
+
+		return ceil($post_count / 10.0);
+	}
 }
 
 // Sets up a database with necesary tables for a board 
@@ -63,6 +72,7 @@ function setup_board_table($board_id)
 			is_staff_post int not null,
 			staff_username varchar(255),
 
+			sticky int default 0,
 			approved int not null default 0
 		);
 	");
@@ -117,7 +127,7 @@ function board_edit_info($id, $title, $subtitle)
 	");
 }
 
-function board_get($board_id)
+function board_get($board_id, $page = 0)
 {
 	$database = new Database();
 	$query_result = $database->query("select * from board_info where id = '$board_id';");
@@ -128,7 +138,15 @@ function board_get($board_id)
 	$board->title = $board_array["title"];
 	$board->subtitle = $board_array["subtitle"];
 
-	$query_result = $database->query("select id from posts_$board_id where is_reply = 0;");
+	$post_range_begin = 10 * $page;
+	$post_range_end = 10 * $page + 10;
+
+	$query_result = $database->query("
+		select id from posts_$board_id
+		where is_reply = 0
+		order by sticky desc, bump_time desc
+		limit $post_range_begin, $post_range_end;
+	");
 	
 	while ($post_id = $query_result->fetch_assoc())
 	{

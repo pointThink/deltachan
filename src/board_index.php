@@ -3,6 +3,24 @@ include_once "internal/board.php";
 include_once "internal/ui.php";
 include_once "internal/staff_session.php";
 include_once "internal/bans.php";
+
+function show_pages()
+{
+	echo "<div class=board_pages>Pages: ";
+	global $board;
+	
+	$page_count = $board->get_pages_count();
+
+	for ($i = 0; $i < $page_count; $i++)
+	{
+		if ($i == $_GET["p"])
+			echo "<a class=selected_page href='?p=$i'>[$i]</a>";
+		else
+			echo "<a href='?p=$i'>[$i]</a>";
+	}
+
+	echo "</div>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +28,7 @@ include_once "internal/bans.php";
 	<head>
 		<?php
 			$database = new Database();
-			$board = board_get($board_id);
+			$board = board_get($board_id, $_GET["p"]);
 			echo "<title>/$board->id/ - $board->title</title>";
 		
 			include "internal/link_css.php";
@@ -25,7 +43,7 @@ include_once "internal/bans.php";
 				echo "<script>alert('" . $_GET["error"] . "')</script>"
 		?>
 
-		<div id="board_index_header">
+		<div class="title">
 			<?php
 				$mod_mode = staff_session_is_valid();
 
@@ -53,16 +71,34 @@ include_once "internal/bans.php";
 			?>
 		</div>
 
+		<?php show_pages(); ?>
+
 		<div id="posts">
 			<?php
+				$sticky_posts = array();
+				$posts = array();
+
+				foreach ($board->posts as $post)
+				{
+					if ($post->sticky)
+						array_push($sticky_posts, $post);
+					else
+						array_push($posts, $post);
+				}
+
 				function sort_func($o1, $o2)
 				{
 					return $o1->bump_time < $o2->bump_time;
 				}
 
-				usort($board->posts, "sort_func");
+				
+				foreach ($sticky_posts as $post)
+				{
+					echo "<hr>";
+					$post->display($mod_mode, true);
+				}
 
-				foreach ($board->posts as $post)
+				foreach ($posts as $post)
 				{
 					echo "<hr>";
 					$post->display($mod_mode, true);
@@ -73,6 +109,8 @@ include_once "internal/bans.php";
 		
 		<script src="/internal/board_index.js"></script>	
 		<script src=/internal/post_display.js></script>
+
+		<?php show_pages(); ?>
 
 		<?php include "footer.php" ?>
 	</body>

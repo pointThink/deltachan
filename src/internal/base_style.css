@@ -13,6 +13,26 @@ body {
   text-align: center;
 }
 
+.pin {
+	line-height: normal;
+	vertical-align: middle;
+	height: 16px;
+	display: inline;
+	margin-right: 0.1cm;
+}
+
+.title {
+	margin-bottom: 1cm;
+}
+
+.title h4 {
+	font-weight: normal;
+}
+
+.title * {
+	margin: 0.2cm;
+}
+
 #staff_dashboard_title h4,
 #staff_dashboard_title a {
   margin: 0;
@@ -99,7 +119,7 @@ body {
 	width: fit-content;
 	overflow-x: auto;
 	padding: 0.2cm;
-	margin: 0.1cm;
+	margin: 0.2cm;
 }
 
 .greentext {
@@ -148,6 +168,7 @@ form .clear_file, form .file_upload {
 	max-height: 200px;
 
 	float: left;
+	border: none;
 	display: inline-block;
 
 	margin-right: 0.2cm;
@@ -278,4 +299,31 @@ form .clear_file, form .file_upload {
 
 .list .boards_table td {
 	padding: 0.2cm;
+}
+
+#site_banner {
+	max-width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+
+	margin-bottom: 0.5cm;
+}
+
+#site_banner img {
+	height: 100px;
+}
+
+.board_pages {
+	margin: 0.2cm;
+	padding: 0.3cm;
+	font-size: 12px;
+}
+
+.board_pages a p {
+	margin: 0.1cm;
+}
+
+.board_pages .selected_page {
+	margin: 0.1cm;
+	font-weight: bold;
 }
