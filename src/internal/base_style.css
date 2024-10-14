@@ -22,7 +22,7 @@ body {
 }
 
 .title {
-	margin-bottom: 1cm;
+	margin-bottom: 0.5cm;
 }
 
 .title h4 {
@@ -314,6 +314,7 @@ form .clear_file, form .file_upload {
 }
 
 .board_pages {
+	display: inline-block;
 	margin: 0.2cm;
 	padding: 0.3cm;
 	font-size: 12px;

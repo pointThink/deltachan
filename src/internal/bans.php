@@ -30,6 +30,7 @@ function is_user_banned()
 function ban_read($ip)
 {
     $database = new Database();
+    $ip = $database->sanitize($ip);
     $query_result = $database->query("select * from bans where ip = '$ip';");
 
     if ($query_result->num_rows <= 0)
@@ -66,7 +67,11 @@ function ban_list_banned_ips()
 function create_ban($ip, $reason, $duration)
 {
     $database = new Database();
-    
+ 
+    $ip = $database->sanitize($ip);
+    $reason = $database->sanitize($reason);
+    $duration = $database->sanitize($duration);
+
     $database->query("
         insert into bans (
             ip, reason, duration
@@ -79,6 +84,7 @@ function create_ban($ip, $reason, $duration)
 function ban_remove($ip)
 {
     $database = new Database();
+    $ip = $database->sanitize($ip);
     $database->query("
         delete from bans where ip = '$ip';
     ");

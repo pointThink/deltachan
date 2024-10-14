@@ -85,6 +85,12 @@ function staff_is_moderator()
 function write_staff_account($username, $password_hash, $role, $contact_email = "")
 {
 	$database = new Database();
+
+	$username = $database->sanitize($username);
+	$password_hash = $database->sanitize($password_hash);
+	$role = $database->sanitize($role);
+	$contact_email = $database->sanitize($contact_email);
+
 	$database->query("
 		insert into staff_accounts (
 			username, password_hash, role, contact_email
@@ -97,6 +103,11 @@ function write_staff_account($username, $password_hash, $role, $contact_email = 
 function update_staff_account($old_username, $username, $role, $contact_email = "")
 {
 	$database = new Database();
+
+	$old_username = $database->sanitize($old_username);
+	$role = $database->sanitize($role);
+	$contact_email = $database->sanitize($contact_email);
+
 	$database->query("
 		update staff_accounts
 		set username = '$username', role = '$role', contact_email = '$contact_email'
@@ -107,6 +118,11 @@ function update_staff_account($old_username, $username, $role, $contact_email = 
 function update_staff_account_password($username, $password_hash)
 {
 	$database = new Database();
+
+	$username = $database->sanitize($username);
+	$password_hash = $database->sanitize($password_hash);
+
+
 	$database->query("
 		update staff_accounts
 		set password_hash = '$password_hash'
@@ -117,6 +133,7 @@ function update_staff_account_password($username, $password_hash)
 function delete_staff_account($username)
 {
 	$database = new Database();
+	$username = $database->sanitize($username);
 	$database->query("
 		delete from staff_accounts where username = '$username';
 	");
@@ -125,6 +142,7 @@ function delete_staff_account($username)
 function read_staff_account($username)
 {
 	$database = new Database();
+	$username = $database->sanitize($username);
 	$account_info = new StaffAccountInfo();
 	$username = $database->mysql_connection->real_escape_string($username);
 

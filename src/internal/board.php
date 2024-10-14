@@ -130,6 +130,10 @@ function board_edit_info($id, $title, $subtitle)
 function board_get($board_id, $page = 0)
 {
 	$database = new Database();
+
+	$board_id = $database->sanitize($board_id);
+	$page = $database->sanitize($page);
+
 	$query_result = $database->query("select * from board_info where id = '$board_id';");
 	$board_array = $query_result->fetch_array();
 	$board = new Board();

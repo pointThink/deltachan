@@ -1,6 +1,7 @@
 <?php
 include_once "../../staff_session.php";
 include_once "../../bans.php";
+include_once "../../board.php";
 
 if (!staff_is_moderator() || !staff_session_is_valid())
     die("You are not allowed here");
@@ -30,11 +31,10 @@ if (count($_POST) > 0)
             unlink(__DIR__ . "/../../../$post->image_file");
             unlink(__DIR__ . "/../../../$thumbnail_path");	
             
-
             $database->remove_post($board, $id);
 
             foreach ($post->replies as $reply)
-                delete_post($reply->id);
+                delete_post($reply->id, $board);
         }
 
         foreach (board_list() as $board)
