@@ -8,6 +8,7 @@ include_once "internal/staff_session.php";
 			echo "<p>[</p>";
 			echo "<p>Logged in as " . staff_get_current_user()->username . "</p>";
 			echo "<a href=/internal/actions/staff/logout.php>Logout</a>";
+			echo "<a href=/staff_dashboard.php>Dashboard</a>";
 			echo "<p>]</p>";
 		}
 	?>

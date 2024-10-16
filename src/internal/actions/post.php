@@ -35,18 +35,18 @@ $database = new Database();
 
 // If user is logged in as staff create a staff post
 $is_mod_post = "0";
-$mod_user = "";
+$name = $_POST["name"];
 
 if (staff_session_is_valid())
 {
 	$user = staff_get_current_user();
-	$mod_user = $user->username;
+	$name = $user->username;
 	$is_mod_post = "1";
 }
 
 $result = $database->write_post(
-	$_POST["board"], $_POST["is_reply"], $_POST["replies_to"], trim($_POST["title"]), trim($_POST["comment"]),
-	$_SERVER["REMOTE_ADDR"], "pl", $is_mod_post, $mod_user
+	$_POST["board"], $_POST["is_reply"], $_POST["replies_to"], $name, trim($_POST["title"]), trim($_POST["comment"]),
+	$_SERVER["REMOTE_ADDR"], "pl", $is_mod_post
 );
 
 if (!is_dir(__DIR__ . "/../../" . $file_upload_dir))
