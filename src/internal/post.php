@@ -121,6 +121,9 @@ class Post
 
 		echo "<span class=name_segment>";
 
+		if ($this->title != "")
+			echo "<p class=post_title>$this->title</p>";	
+
 		if (!$this->is_staff_post)
 			echo "<p class=name>$this->name</p>";
 		else
@@ -197,9 +200,6 @@ class Post
 				}
 			}
 		}
-
-		if ($this->title != "")
-			echo "<br><h4 class=post_title>$this->title</h4>";	
 
 		echo "<div class=post_comment>";
 		$this->format_and_show_text($this->body);
