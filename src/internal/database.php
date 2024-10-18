@@ -19,20 +19,13 @@ class Database
 			$password = openssl_decrypt($deltachan_config["database_password"], "aes-256-ecb", $key);
 		}
 
-		try
-		{
-			$this->mysql_connection = new mysqli($host, $user, $password);
-		}
-		catch (Exception $e)
-		{
-			echo "DB connection error: $e";
-		}
+		$this->mysql_connection = new mysqli($host, $user, $password);
 	}
 
 	public function setup_meta_info_database()
 	{
 		global $deltachan_config;
-		$this->mysql_connection->query("create database if not exists " . $deltachan_config["database_name"] . ";");
+		// $this->mysql_connection->query("create database if not exists " . $deltachan_config["database_name"] . ";");
 		
 		$this->query("
 			create table if not exists board_info (

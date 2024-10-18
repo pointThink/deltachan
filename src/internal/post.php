@@ -39,7 +39,7 @@ class Post
 		else if (str_starts_with($mime_type, "image"))
 		{
 			$file_parts = explode(".", $this->image_file);
-			$thumb_file_name = $file_parts[0] . "-thumb.jpg";
+			$thumb_file_name = $file_parts[0] . "-thumb.webp";
 			echo "<a href=/$this->image_file><img class=post_attachment src='/$thumb_file_name'></a>";
 		}
 		else

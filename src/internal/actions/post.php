@@ -71,8 +71,12 @@ if ($_FILES["file"]["size"] > 0)
 		$desired_height = floor($height * ($desired_width / $width));
 
 		$virtual_image = imagecreatetruecolor($desired_width, $desired_height);
+		imagealphablending($virtual_image, false);
+		imagesavealpha($virtual_image, true);
+		$color = imagecolorallocatealpha($virtual_image, 0, 0, 0, 127);
+		imagefill($virtual_image, 0, 0, $color);
 		imagecopyresampled($virtual_image, $image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
-		imagejpeg($virtual_image, __DIR__ . "/../../" . $file_upload_dir . "$result->board-$result->id-thumb.jpg");
+		imagewebp($virtual_image, __DIR__ . "/../../" . $file_upload_dir . "$result->board-$result->id-thumb.webp");
 	}
 }
 

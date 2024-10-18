@@ -149,7 +149,7 @@ body {
 	color: #117743;
 	font-weight: bold;
 	margin: 0;
-	margin-right: 0.1cm;
+	margin-right: 0.2cm;
 }
 
 .post .staff_name {
@@ -179,13 +179,9 @@ form .clear_file, form .file_upload {
 
 	float: left;
 	border: none;
-	display: inline-block;
 
 	margin-right: 0.2cm;
-}
-
-.post .post_attachment_expanded {
-	display: none;
+	background: none;
 }
 
 .post .post_attachment_non_image {
