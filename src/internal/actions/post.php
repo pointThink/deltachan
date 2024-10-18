@@ -5,6 +5,7 @@ session_start();
 include_once "../database.php";
 include_once "../bans.php";
 include_once "../staff_session.php";
+include_once "../geolocation.php";
 
 function error_die($error)
 {
@@ -44,9 +45,11 @@ if (staff_session_is_valid())
 	$is_mod_post = "1";
 }
 
+$geolocation = new IPLocationInfo($_SERVER["REMOTE_ADDR"]);
+
 $result = $database->write_post(
 	$_POST["board"], $_POST["is_reply"], $_POST["replies_to"], $name, trim($_POST["title"]), trim($_POST["comment"]),
-	$_SERVER["REMOTE_ADDR"], "pl", $is_mod_post
+	$_SERVER["REMOTE_ADDR"], $geolocation->country, $is_mod_post
 );
 
 if (!is_dir(__DIR__ . "/../../" . $file_upload_dir))
